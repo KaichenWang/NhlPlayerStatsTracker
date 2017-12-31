@@ -6,13 +6,20 @@ import thunkMiddleware from 'redux-thunk'
 import rootReducer from './containers/reducers'
 import App from './containers/app/container'
 
+const composeEnhancers =
+    typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+            // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+        }) : compose;
+
+
 let store = createStore(
     rootReducer,
-    compose(
+    composeEnhancers(
         applyMiddleware(
             thunkMiddleware // lets us dispatch() functions
-        ),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        )
     )
 )
 
