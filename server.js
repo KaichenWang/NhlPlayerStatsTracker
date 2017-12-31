@@ -44,19 +44,18 @@ app.get('/player/sheaweber', function (req, res) {
     })
 })
 
-app.get('/team', function (req, res) {
-    var url = 'http://www.tsn.ca/datafiles/XML/NHL/standings.xml';
+app.get('/search', function (req, res) {
+    var value = req.query.value
+    var url = 'https://suggest.svc.nhl.com/svc/suggest/v1/minactiveplayers/' + value + '/99999';
     var json = {};
     request(url, function (err, response, data) {
         if (err || response.statusCode != 200) {
             console.log('REQUEST ERROR: ' + err);
         }
         else {
-            parseString(data, function (err, result) {
-                if(!err){
-                   json = JSON.parse(JSON.stringify(result));
-                }
-            });
+            json = data;
+            var test = json
+
         }
         res.send(json);
     })

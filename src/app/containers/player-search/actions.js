@@ -5,7 +5,7 @@ export const setResults = createAction('Set search results')
 
 export function onSearchInputChange(value) {
     return (dispatch) => {
-        return fetch('https://suggest.svc.nhl.com/svc/suggest/v1/minactiveplayers/' + value + '/99999')
+        return fetch('/search?value=' + value)
             .then(
                 response => response.json(),
                 // Do not use catch, because that will also catch
