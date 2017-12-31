@@ -47,8 +47,9 @@ class PlayerSearch extends React.Component {
                     {Object.keys(results).map(function (key) {
                         const result = results[key]
                         return (
-                            <li key={result.id} onClick={() => onResultClick(result.id)}>
-                                <span>{result.firstName} </span>
+                            <li key={result.id}>
+                                <button onClick={() => onResultClick(result.id)}>Add</button>
+                                <span> {result.firstName} </span>
                                 <span>{result.lastName} </span>
                                 <span>({result.team}) </span>
                                 <span>- {result.id}</span>
