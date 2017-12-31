@@ -28,6 +28,22 @@ export default createReducer({
         return Object.assign({}, state, {
             players
         })
+    },
+    [actions.setStats]: (state, payload) => {
+
+        const stats = {}
+        const allStats = payload.data.people[0].stats[0].splits
+        const currentStats = allStats.find((obj) => {
+            return obj.season === '20172018'
+        }).stat
+        stats[payload.playerId] = currentStats
+        
+        return Object.assign({}, state, {
+            stats: {
+                ...state.stats,
+                ...stats
+            }
+        })
     }
 }, initialState)
 

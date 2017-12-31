@@ -7,7 +7,8 @@ import Card from '../../components/card/card'
 class PlayerCards extends React.Component {
     render() {
         const {
-            players
+            players,
+            stats
         } = this.props.app
 
         const {
@@ -22,6 +23,7 @@ class PlayerCards extends React.Component {
                         <Card
                             key={player.id}
                             player={player}
+                            stats={stats[player.id]}
                             removePlayer={removePlayer}
                         />
                     )

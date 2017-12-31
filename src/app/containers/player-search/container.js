@@ -8,17 +8,29 @@ import { DebounceInput } from 'react-debounce-input'
 class PlayerSearch extends React.Component {
     render() {
         const {
+            stats
+        } = this.props.app
+
+        const {
             results
         } = this.props.playerSearch
 
         const {
             onSearchInputChange,
-            addPlayer
+            addPlayer,
+            addStats
         } = this.props
 
         const onChange = (e) => {
             e.persist()
             onSearchInputChange(e.target.value)
+        }
+
+        const onResultClick = (resultId) => {
+            addPlayer(results[resultId])
+            if (!stats[resultId]){
+                addStats(resultId)
+            }
         }
 
         return (
@@ -35,7 +47,7 @@ class PlayerSearch extends React.Component {
                     {Object.keys(results).map(function (key) {
                         const result = results[key]
                         return (
-                            <li key={result.id} onClick={() => addPlayer(results[result.id])}>
+                            <li key={result.id} onClick={() => onResultClick(result.id)}>
                                 <span>{result.firstName} </span>
                                 <span>{result.lastName} </span>
                                 <span>({result.team}) </span>
@@ -55,13 +67,15 @@ PlayerSearch.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
+        app: state.app,
         playerSearch: state.playerSearch
     }
 }
 
 const mapDispatchToProps = {
     onSearchInputChange: actions.onSearchInputChange,
-    addPlayer: appActions.addPlayer
+    addPlayer: appActions.addPlayer,
+    addStats: appActions.addStats
 }
 
 export default connect(
