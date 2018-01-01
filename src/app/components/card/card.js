@@ -6,6 +6,7 @@ const componentClass = 'c-card'
 const Card = ({ player, stats, removePlayer }) => (
     <div className={ componentClass } style={{border: '1px solid black'}}>
         <button onClick={() => removePlayer(player.id)}>Remove</button>
+        <img src={'https://nhl.bamcontent.com/images/headshots/current/168x168/' + player.id +'.jpg'}/>
         <h2>{player.firstName + ' ' + player.lastName}</h2>
 
             {!!stats ?

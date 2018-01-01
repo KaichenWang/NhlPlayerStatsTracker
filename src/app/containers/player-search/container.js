@@ -37,7 +37,7 @@ class PlayerSearch extends React.Component {
 
         return (
             <div>
-                <form>
+                <form onSubmit={e => { e.preventDefault(); }}>
                     <DebounceInput
                         type="text"
                         debounceTimeout={500}

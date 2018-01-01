@@ -7,6 +7,11 @@ import App from './containers/app/container'
 
 import reducers from './containers/reducers'
 import { routerForBrowser, initializeCurrentLocation } from 'redux-little-router';
+import { onInitialLoad } from './containers/app/actions'
+
+import { push } from 'redux-little-router';
+
+import { MAX_PLAYERS } from './constants'
 
 const composeEnhancers =
     typeof window === 'object' &&
@@ -48,9 +53,27 @@ let store = createStore(
     )
 )
 
-const initialLocation = store.getState().router;
+const initialLocation = store.getState().router
 if (initialLocation) {
-    store.dispatch(initializeCurrentLocation(initialLocation));
+    const queryPlayers = initialLocation.query.player
+    if(!!queryPlayers && queryPlayers.length > 0) {
+        if (Array.isArray(queryPlayers)) {
+            const limited = queryPlayers.slice(0, MAX_PLAYERS)
+
+            const unique = limited.filter(function(item, pos) {
+                return limited.indexOf(item) == pos;
+            })
+            store.dispatch(onInitialLoad(unique))
+            store.dispatch(push({
+                query: {
+                    player: unique
+                }
+            }))
+        }
+        else {
+            store.dispatch(onInitialLoad(queryPlayers))
+        }
+    }
 }
 
 render(

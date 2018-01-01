@@ -16,12 +16,16 @@ class PlayerCards extends React.Component {
         } = this.props.router
 
         const {
-            removePlayer
+            removePlayer,
+            removeAllPlayers
         } = this.props
 
         return (
             <div>
-                {!!query.player && query.player.length > 0 && !Array.isArray(query.player) &&
+                {Object.keys(players).length > 0 &&
+                    <button onClick={() => removeAllPlayers()}>Clear all</button>
+                }
+                {!!query.player && query.player.length > 0 && !Array.isArray(query.player) && !!players[query.player] &&
                     <Card
                         key={players[query.player].id}
                         player={players[query.player]}
@@ -33,6 +37,7 @@ class PlayerCards extends React.Component {
                     query.player.map(function (key) {
                         const player = players[key]
                         return (
+                            player &&
                             <Card
                                 key={player.id}
                                 player={player}
@@ -41,6 +46,9 @@ class PlayerCards extends React.Component {
                             />
                         )
                     })
+                }
+                {Object.keys(players).length > 0 &&
+                    <button onClick={() => removeAllPlayers()}>Clear all</button>
                 }
             </div>
         )
@@ -55,7 +63,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    removePlayer: appActions.removePlayer
+    removePlayer: appActions.removePlayer,
+    removeAllPlayers: appActions.removeAllPlayers
 }
 
 export default connect(

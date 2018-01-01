@@ -20,7 +20,7 @@ export default createReducer({
     },
     [actions.unsetPlayer]: (state, id) => {
         const players = Object.keys(state.players).reduce((obj, key) => {
-            if (key !== id) {
+            if (key !== String(id)) {
                 return { ...obj, [key]: state.players[key] }
             }
             return obj
@@ -28,6 +28,11 @@ export default createReducer({
 
         return Object.assign({}, state, {
             players
+        })
+    },
+    [actions.unsetAllPlayers]: (state) => {
+        return Object.assign({}, state, {
+            players: {}
         })
     },
     [actions.setStats]: (state, payload) => {

@@ -1,14 +1,32 @@
 import {createAction} from 'redux-act'
 import fetch from 'cross-fetch'
 import { push } from 'redux-little-router';
+import { MAX_PLAYERS } from '../../constants'
 
 export const setPlayer = createAction('Add player')
 export const unsetPlayer = createAction('Remove player')
+export const unsetAllPlayers = createAction('Remove all players')
 export const setStats = createAction('Set stats')
 
 export function addPlayer(playerId) {
     return (dispatch, state) => {
-        dispatch(setPlayer(playerId))
+        if (Object.keys(state().app.players).length < MAX_PLAYERS) {
+            dispatch(setPlayer(playerId))
+            dispatch(push({
+                query: {
+                    player: Object.keys(state().app.players)
+                }
+            }))
+        }
+        else {
+            alert('Max number of players is: ' + MAX_PLAYERS)
+        }
+    }
+}
+
+export function removePlayer(playerId) {
+    return (dispatch, state) => {
+        dispatch(unsetPlayer(playerId))
         dispatch(push({
             query: {
                 player: Object.keys(state().app.players)
@@ -17,9 +35,9 @@ export function addPlayer(playerId) {
     }
 }
 
-export function removePlayer(playerId) {
+export function removeAllPlayers() {
     return (dispatch, state) => {
-        dispatch(unsetPlayer(playerId))
+        dispatch(unsetAllPlayers())
         dispatch(push({
             query: {
                 player: Object.keys(state().app.players)
@@ -52,6 +70,50 @@ export function addStats(playerId) {
 
 export function onInitialLoad(queryPlayers) {
     return (dispatch) => {
-        debugger
+        if (Array.isArray(queryPlayers)) {
+            queryPlayers.map((value) => {
+                fetch('https://statsapi.web.nhl.com/api/v1/people/' + value + '?expand=person.stats&stats=yearByYear&site=en_nhlCA')
+                .then(
+                    response => response.json(),
+                    error => console.log('An error occurred.', error)
+                )
+                .then(json => {
+                    const data = json.people[0]
+                    const player = {
+                        id: data.id,
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                        team: data.nationality
+                    }
+                    dispatch(setPlayer(player))
+                    dispatch(setStats({
+                        playerId: player.id,
+                        data: json
+                    }))
+                })
+            })
+        }
+        else {
+            fetch('https://statsapi.web.nhl.com/api/v1/people/' + queryPlayers + '?expand=person.stats&stats=yearByYear&site=en_nhlCA')
+                .then(
+                    response => response.json(),
+                    error => console.log('An error occurred.', error)
+                )
+                .then(json => {
+                        const data = json.people[0]
+                        const player = {
+                            id: data.id,
+                            firstName: data.firstName,
+                            lastName: data.lastName,
+                            team: data.nationality
+                        }
+                        dispatch(setPlayer(player))
+                        dispatch(setStats({
+                            playerId: player.id,
+                            data: json
+                        }))
+                    }
+                )
+        }
     }
 }
