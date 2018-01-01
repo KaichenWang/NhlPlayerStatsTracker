@@ -1,10 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import rootReducer from './containers/reducers'
 import App from './containers/app/container'
+
+import reducers from './containers/reducers'
+import { routerForBrowser, initializeCurrentLocation } from 'redux-little-router';
 
 const composeEnhancers =
     typeof window === 'object' &&
@@ -13,15 +15,43 @@ const composeEnhancers =
             // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
         }) : compose;
 
+const routes = {
+    '/': {
+        title: 'Home'
+    }
+};
+
+// Install the router into the store for a browser-only environment.
+// routerForBrowser is a factory method that returns a store
+// enhancer and a middleware.
+const {
+    reducer,
+    middleware,
+    enhancer
+} = routerForBrowser({
+    // The configured routes. Required.
+    routes
+})
+
 
 let store = createStore(
-    rootReducer,
+    combineReducers({
+        ...reducers,
+        router: reducer
+    }),
     composeEnhancers(
+        enhancer,
         applyMiddleware(
+            middleware,
             thunkMiddleware // lets us dispatch() functions
         )
     )
 )
+
+const initialLocation = store.getState().router;
+if (initialLocation) {
+    store.dispatch(initializeCurrentLocation(initialLocation));
+}
 
 render(
     <Provider store={store}>

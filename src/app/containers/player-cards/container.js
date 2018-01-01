@@ -12,22 +12,36 @@ class PlayerCards extends React.Component {
         } = this.props.app
 
         const {
+            query
+        } = this.props.router
+
+        const {
             removePlayer
         } = this.props
 
         return (
             <div>
-                {Object.keys(players).map(function (key) {
-                    const player = players[key]
-                    return (
-                        <Card
-                            key={player.id}
-                            player={player}
-                            stats={stats[player.id]}
-                            removePlayer={removePlayer}
-                        />
-                    )
-                })}
+                {!!query.player && query.player.length > 0 && !Array.isArray(query.player) &&
+                    <Card
+                        key={players[query.player].id}
+                        player={players[query.player]}
+                        stats={stats[players[query.player].id]}
+                        removePlayer={removePlayer}
+                    />
+                }
+                {!!query.player && query.player.length > 0 && Array.isArray(query.player) &&
+                    query.player.map(function (key) {
+                        const player = players[key]
+                        return (
+                            <Card
+                                key={player.id}
+                                player={player}
+                                stats={stats[player.id]}
+                                removePlayer={removePlayer}
+                            />
+                        )
+                    })
+                }
             </div>
         )
     }
@@ -35,7 +49,8 @@ class PlayerCards extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        app: state.app
+        app: state.app,
+        router: state.router
     }
 }
 

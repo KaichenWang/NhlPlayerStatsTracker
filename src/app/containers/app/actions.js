@@ -1,9 +1,32 @@
 import {createAction} from 'redux-act'
 import fetch from 'cross-fetch'
+import { push } from 'redux-little-router';
 
-export const addPlayer = createAction('Add player')
-export const removePlayer = createAction('Remove player')
+export const setPlayer = createAction('Add player')
+export const unsetPlayer = createAction('Remove player')
 export const setStats = createAction('Set stats')
+
+export function addPlayer(playerId) {
+    return (dispatch, state) => {
+        dispatch(setPlayer(playerId))
+        dispatch(push({
+            query: {
+                player: Object.keys(state().app.players)
+            }
+        }))
+    }
+}
+
+export function removePlayer(playerId) {
+    return (dispatch, state) => {
+        dispatch(unsetPlayer(playerId))
+        dispatch(push({
+            query: {
+                player: Object.keys(state().app.players)
+            }
+        }))
+    }
+}
 
 export function addStats(playerId) {
     return (dispatch) => {
@@ -23,5 +46,12 @@ export function addStats(playerId) {
                     }))
                 }
             )
+    }
+}
+
+
+export function onInitialLoad(queryPlayers) {
+    return (dispatch) => {
+        debugger
     }
 }

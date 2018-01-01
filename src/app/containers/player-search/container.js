@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import * as actions from './actions'
 import * as appActions from '../app/actions'
@@ -8,6 +8,7 @@ import { DebounceInput } from 'react-debounce-input'
 class PlayerSearch extends React.Component {
     render() {
         const {
+            players,
             stats
         } = this.props.app
 
@@ -18,7 +19,8 @@ class PlayerSearch extends React.Component {
         const {
             onSearchInputChange,
             addPlayer,
-            addStats
+            addStats,
+            removePlayer
         } = this.props
 
         const onChange = (e) => {
@@ -48,7 +50,12 @@ class PlayerSearch extends React.Component {
                         const result = results[key]
                         return (
                             <li key={result.id}>
-                                <button onClick={() => onResultClick(result.id)}>Add</button>
+                                {
+                                    players[result.id] ?
+                                        <button onClick={() => removePlayer(result.id)}>Remove</button>
+                                    :
+                                        <button onClick={() => onResultClick(result.id)}>Add</button>
+                                }
                                 <span> {result.firstName} </span>
                                 <span>{result.lastName} </span>
                                 <span>({result.team}) </span>
@@ -76,7 +83,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     onSearchInputChange: actions.onSearchInputChange,
     addPlayer: appActions.addPlayer,
-    addStats: appActions.addStats
+    addStats: appActions.addStats,
+    removePlayer: appActions.removePlayer
 }
 
 export default connect(

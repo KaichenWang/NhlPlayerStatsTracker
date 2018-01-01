@@ -3,11 +3,9 @@ import {combineReducers} from 'redux'
 import app from './app/reducer'
 import playerSearch from './player-search/reducer'
 
-
-
-const rootReducer = combineReducers({
+const reducers = {
     app,
     playerSearch
-})
+}
 
-export default rootReducer
+export default reducers
