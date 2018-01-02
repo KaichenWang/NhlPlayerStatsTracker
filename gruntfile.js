@@ -21,6 +21,17 @@ module.exports = function(grunt) {
                 }
             }
         },
+        postcss: {
+            options: {
+                map: true,
+                processors: [
+                    require('autoprefixer')
+                ]
+            },
+            dist: {
+                src: 'src/app/static/css/*.css'
+            }
+        },
 		watch: {
             // scripts: {
             //     files: ['gruntfile.js','app/static/js/*.js'],
@@ -31,7 +42,7 @@ module.exports = function(grunt) {
             // },
             less: {
                 files: ['src/app/static/less/*.less', 'src/app/static/css/*.css'],
-                tasks: ['less','cssmin'],
+                tasks: ['less', 'postcss', 'cssmin'],
                 options: {
                     debounceDelay: 250
                 }
@@ -44,4 +55,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.registerTask('default', ['less']);
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-postcss');
 }

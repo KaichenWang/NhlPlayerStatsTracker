@@ -27,7 +27,9 @@ class PlayerCards extends React.Component {
         return (
             <div>
                 {Object.keys(players).length > 0 &&
-                    <button onClick={() => removeAllPlayers()}>Clear all</button>
+                    <div className={'player-cards__action'}>
+                        <button className={'btn btn-primary btn-sm'} onClick={() => removeAllPlayers()}>Clear all</button>
+                    </div>
                 }
 
                 {queryPlayers.map(function (key) {
@@ -45,7 +47,9 @@ class PlayerCards extends React.Component {
                 }
 
                 {Object.keys(players).length > 0 &&
-                    <button onClick={() => removeAllPlayers()}>Clear all</button>
+                    <div className={'player-cards__action'}>
+                        <button className={'btn btn-primary btn-sm'} onClick={() => removeAllPlayers()}>Clear all</button>
+                    </div>
                 }
             </div>
         )

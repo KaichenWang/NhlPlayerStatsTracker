@@ -1,6 +1,53 @@
 /* Imports */
 @import '_variables.less';
 
-div{
-    border: 3px solid red !important;
+.c-card {
+    border: @border-default;
+}
+
+.c-card__info {
+    display: flex;
+    align-items: center;
+    background-color: #dadada;
+    padding: 10px;
+}
+
+.c-card__name {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.c-card__name-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.c-card__image {
+    border-radius: 100%;
+    border: @border-default;
+    height: 65px;
+    width: 65px;
+}
+
+.c-card__stats {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+.c-card__data {
+    font-size: small;
+
+    th,
+    td {
+        white-space: nowrap;
+    }
+}
+
+.player-cards__action {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
 }
