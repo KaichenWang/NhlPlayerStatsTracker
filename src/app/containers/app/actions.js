@@ -29,7 +29,7 @@ export function addPlayer(playerId) {
 export function removePlayer(playerId) {
     return (dispatch, state) => {
         dispatch(unsetPlayer(playerId))
-        const players = Object.keys(state().app.players).length > 0 ? Object.keys(state().app.players) : undefined
+        const players = Object.keys(state().app.players).length > 0 ? parseArrayToQuery(Object.keys(state().app.players)) : undefined
         dispatch(push({
             query: {
                 players
