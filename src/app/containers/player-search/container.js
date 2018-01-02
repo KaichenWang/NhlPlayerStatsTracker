@@ -36,34 +36,39 @@ class PlayerSearch extends React.Component {
         }
 
         return (
-            <div>
-                <form onSubmit={e => { e.preventDefault(); }}>
+            <div className={'search'}>
+                <form onSubmit={e => { e.preventDefault(); }} autoComplete="off">
                     <DebounceInput
                         type="text"
                         debounceTimeout={500}
-                        placeholder="Search player"
+                        placeholder="Enter NHL player name"
                         name="search"
+                        autoComplete="false"
+                        className={'search__input form-control'}
                         onChange={onChange} />
                 </form>
-                <ul>
-                    {Object.keys(results).map(function (key) {
-                        const result = results[key]
-                        return (
-                            <li key={result.id}>
-                                {
-                                    players[result.id] ?
-                                        <button onClick={() => removePlayer(result.id)}>Remove</button>
-                                    :
-                                        <button onClick={() => onResultClick(result.id)}>Add</button>
-                                }
-                                <span> {result.firstName} </span>
-                                <span>{result.lastName} </span>
-                                <span>({result.team}) </span>
-                                <span>- {result.id}</span>
-                            </li>
-                        )
-                    })}
-                </ul>
+                {Object.keys(results).length > 0 &&
+                    <ul className={'search__result-group list-group'}>
+                        {Object.keys(results).map(function (key) {
+                            const result = results[key]
+                            return (
+                                <li className={'search__result-item'} key={result.id}>
+                                    <span className={'search__result-info'}>
+                                        <span> {result.firstName} </span>
+                                        <span>{result.lastName} </span>
+                                        <span>({result.team}) </span>
+                                    </span>
+                                    {
+                                        players[result.id] ?
+                                            <button className={'search__result-btn btn btn-danger btn-sm'} onClick={() => removePlayer(result.id)}>Remove</button>
+                                            :
+                                            <button className={'search__result-btn btn btn-success btn-sm'} onClick={() => onResultClick(result.id)}>Add</button>
+                                    }
+                                </li>
+                            )
+                        })}
+                    </ul>
+                }
             </div>
         )
     }

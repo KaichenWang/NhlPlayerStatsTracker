@@ -28,7 +28,7 @@ class PlayerCards extends React.Component {
             <div>
                 {Object.keys(players).length > 0 &&
                     <div className={'player-cards__action'}>
-                        <button className={'btn btn-primary btn-sm'} onClick={() => removeAllPlayers()}>Clear all</button>
+                        <button className={'btn btn-primary btn-sm'} onClick={() => removeAllPlayers()}>Remove all</button>
                     </div>
                 }
 
@@ -48,7 +48,7 @@ class PlayerCards extends React.Component {
 
                 {Object.keys(players).length > 0 &&
                     <div className={'player-cards__action'}>
-                        <button className={'btn btn-primary btn-sm'} onClick={() => removeAllPlayers()}>Clear all</button>
+                        <button className={'btn btn-primary btn-sm'} onClick={() => removeAllPlayers()}>Remove all</button>
                     </div>
                 }
             </div>

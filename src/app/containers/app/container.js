@@ -6,7 +6,9 @@ import PlayerCards from '../player-cards/container'
 
 const App = () => (
     <div>
-        <h1>NHL Player Stats Tracker</h1>
+        <div className="page-title-container">
+            <h1 className={'h2'}>NHL Player Stats Tracker</h1>
+        </div>
         <PlayerSearch/>
         <PlayerCards/>
     </div>
