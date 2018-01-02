@@ -102,7 +102,6 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.use(express.static('static'));
 app.use(express.static('src/public'));
 
 // app.get('/*', function(req, res) {
