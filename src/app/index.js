@@ -13,6 +13,8 @@ import { push } from 'redux-little-router';
 
 import { MAX_PLAYERS } from './constants'
 
+import { parseQueryToArray, parseArrayToQuery } from './utils'
+
 const composeEnhancers =
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
@@ -55,24 +57,21 @@ let store = createStore(
 
 const initialLocation = store.getState().router
 if (initialLocation) {
-    const queryPlayers = initialLocation.query.player
+    const queryPlayers = initialLocation.query.players
     if(!!queryPlayers && queryPlayers.length > 0) {
-        if (Array.isArray(queryPlayers)) {
-            const limited = queryPlayers.slice(0, MAX_PLAYERS)
+        const playerIds = parseQueryToArray(queryPlayers)
+        const limited =  playerIds.slice(0, MAX_PLAYERS)
 
-            const unique = limited.filter(function(item, pos) {
-                return limited.indexOf(item) == pos;
-            })
-            store.dispatch(onInitialLoad(unique))
-            store.dispatch(push({
-                query: {
-                    player: unique
-                }
-            }))
-        }
-        else {
-            store.dispatch(onInitialLoad(queryPlayers))
-        }
+        const unique = limited.filter(function(item, pos) {
+            return limited.indexOf(item) == pos;
+        })
+
+        store.dispatch(onInitialLoad(unique))
+        store.dispatch(push({
+            query: {
+                players: parseArrayToQuery(unique)
+            }
+        }))
     }
 }
 

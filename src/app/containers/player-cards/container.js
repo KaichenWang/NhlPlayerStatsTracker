@@ -4,6 +4,8 @@ import * as appActions from '../app/actions'
 
 import Card from '../../components/card/card'
 
+import { parseQueryToArray } from '../../utils'
+
 class PlayerCards extends React.Component {
     render() {
         const {
@@ -20,21 +22,15 @@ class PlayerCards extends React.Component {
             removeAllPlayers
         } = this.props
 
+        const queryPlayers = !!query.players && query.players.length > 0 ? parseQueryToArray(query.players) : []
+
         return (
             <div>
                 {Object.keys(players).length > 0 &&
                     <button onClick={() => removeAllPlayers()}>Clear all</button>
                 }
-                {!!query.player && query.player.length > 0 && !Array.isArray(query.player) && !!players[query.player] &&
-                    <Card
-                        key={players[query.player].id}
-                        player={players[query.player]}
-                        stats={stats[players[query.player].id]}
-                        removePlayer={removePlayer}
-                    />
-                }
-                {!!query.player && query.player.length > 0 && Array.isArray(query.player) &&
-                    query.player.map(function (key) {
+
+                {queryPlayers.map(function (key) {
                         const player = players[key]
                         return (
                             player &&
@@ -47,6 +43,7 @@ class PlayerCards extends React.Component {
                         )
                     })
                 }
+
                 {Object.keys(players).length > 0 &&
                     <button onClick={() => removeAllPlayers()}>Clear all</button>
                 }

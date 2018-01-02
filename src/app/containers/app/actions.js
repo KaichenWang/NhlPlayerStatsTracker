@@ -3,6 +3,8 @@ import fetch from 'cross-fetch'
 import { push } from 'redux-little-router';
 import { MAX_PLAYERS } from '../../constants'
 
+import { parseArrayToQuery } from '../../utils'
+
 export const setPlayer = createAction('Add player')
 export const unsetPlayer = createAction('Remove player')
 export const unsetAllPlayers = createAction('Remove all players')
@@ -14,7 +16,7 @@ export function addPlayer(playerId) {
             dispatch(setPlayer(playerId))
             dispatch(push({
                 query: {
-                    player: Object.keys(state().app.players)
+                    players: parseArrayToQuery(Object.keys(state().app.players))
                 }
             }))
         }
@@ -27,9 +29,10 @@ export function addPlayer(playerId) {
 export function removePlayer(playerId) {
     return (dispatch, state) => {
         dispatch(unsetPlayer(playerId))
+        const players = Object.keys(state().app.players).length > 0 ? Object.keys(state().app.players) : undefined
         dispatch(push({
             query: {
-                player: Object.keys(state().app.players)
+                players
             }
         }))
     }
@@ -40,7 +43,7 @@ export function removeAllPlayers() {
         dispatch(unsetAllPlayers())
         dispatch(push({
             query: {
-                player: Object.keys(state().app.players)
+                players: undefined
             }
         }))
     }
@@ -70,50 +73,26 @@ export function addStats(playerId) {
 
 export function onInitialLoad(queryPlayers) {
     return (dispatch) => {
-        if (Array.isArray(queryPlayers)) {
-            queryPlayers.map((value) => {
-                fetch('https://statsapi.web.nhl.com/api/v1/people/' + value + '?expand=person.stats&stats=yearByYear&site=en_nhlCA')
-                .then(
-                    response => response.json(),
-                    error => console.log('An error occurred.', error)
-                )
-                .then(json => {
-                    const data = json.people[0]
-                    const player = {
-                        id: data.id,
-                        firstName: data.firstName,
-                        lastName: data.lastName,
-                        team: data.nationality
-                    }
-                    dispatch(setPlayer(player))
-                    dispatch(setStats({
-                        playerId: player.id,
-                        data: json
-                    }))
-                })
+        queryPlayers.map((value) => {
+            fetch('https://statsapi.web.nhl.com/api/v1/people/' + value + '?expand=person.stats&stats=yearByYear&site=en_nhlCA')
+            .then(
+                response => response.json(),
+                error => console.log('An error occurred.', error)
+            )
+            .then(json => {
+                const data = json.people[0]
+                const player = {
+                    id: data.id,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    team: data.nationality
+                }
+                dispatch(setPlayer(player))
+                dispatch(setStats({
+                    playerId: player.id,
+                    data: json
+                }))
             })
-        }
-        else {
-            fetch('https://statsapi.web.nhl.com/api/v1/people/' + queryPlayers + '?expand=person.stats&stats=yearByYear&site=en_nhlCA')
-                .then(
-                    response => response.json(),
-                    error => console.log('An error occurred.', error)
-                )
-                .then(json => {
-                        const data = json.people[0]
-                        const player = {
-                            id: data.id,
-                            firstName: data.firstName,
-                            lastName: data.lastName,
-                            team: data.nationality
-                        }
-                        dispatch(setPlayer(player))
-                        dispatch(setStats({
-                            playerId: player.id,
-                            data: json
-                        }))
-                    }
-                )
-        }
+        })
     }
 }
