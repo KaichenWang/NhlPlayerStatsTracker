@@ -9,6 +9,7 @@ export const setPlayer = createAction('Add player')
 export const unsetPlayer = createAction('Remove player')
 export const unsetAllPlayers = createAction('Remove all players')
 export const setStats = createAction('Set stats')
+export const flagAsRemoved = createAction('Flag player as removed')
 
 export function addPlayer(playerId) {
     return (dispatch, state) => {
@@ -28,6 +29,8 @@ export function addPlayer(playerId) {
 
 export function removePlayer(playerId) {
     return (dispatch, state) => {
+
+        dispatch(flagAsRemoved)
         dispatch(unsetPlayer(playerId))
         const players = Object.keys(state().app.players).length > 0 ? parseArrayToQuery(Object.keys(state().app.players)) : undefined
         dispatch(push({
@@ -35,6 +38,8 @@ export function removePlayer(playerId) {
                 players
             }
         }))
+
+
     }
 }
 

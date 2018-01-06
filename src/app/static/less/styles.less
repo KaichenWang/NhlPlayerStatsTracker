@@ -1,20 +1,65 @@
 /* Imports */
 @import '_variables.less';
 
+html,
+body,
+#app,
+.main {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.main {
+    background: @gray-dark;
+}
+
 .c-card {
+
+}
+
+table {
+    th,
+    td {
+        border-top: 0 !important;
+        border-bottom: 0 !important;
+    }
+
+    thead th {
+        border-bottom: @border-default !important;
+    }
+}
+
+.c-card__inner {
+    //background: @brand-white;
     border: @border-default;
+    margin-top: 50px;
+    border-radius: 10px;
+    color: white;
 }
 
 .c-card__info {
     display: flex;
     align-items: center;
-    background-color: #dadada;
+    //background-color: #dadada;
     padding: 10px;
+    position: relative;
+    border-radius: 9px 9px 0 0;
+    flex-direction: column;
+    padding-top: 50px;
 }
 
 .c-card__name {
     padding-left: 10px;
     padding-right: 10px;
+    text-transform: uppercase;
+    font-family: @font-primary;
 }
 
 .c-card__name-container {
@@ -26,10 +71,18 @@
 
 .c-card__image {
     border-radius: 100%;
-    border: @border-default;
-    height: 65px;
-    width: 65px;
-    flex-shrink: 0;
+    //border: @border-default;
+    height: 90px;
+    width: 90px;
+    //flex-shrink: 0;
+    position: absolute;
+    //left: 50%;
+    top: 0;
+    transform: translateY(-50%);
+    box-shadow: 0px 1px 0px 1px rgba(0,0,0,0,5);
+    background: linear-gradient(135deg, #a81c77 0%,#d8b075 100%);
+    background: linear-gradient(135deg, #25bfdb 0%,#efd883 100%);
+    //border: @border-default;
 }
 
 .c-card__stats {
@@ -39,7 +92,9 @@
 }
 
 .c-card__remove {
-    flex-shrink: 0;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 .c-card__data {
@@ -86,4 +141,36 @@
 .page-title-container {
     padding: 20px;
     display: none;
+}
+
+
+
+.c-loader {
+    &::before {
+        margin: auto;
+        content:'';
+        display: block;
+        border: 10px solid #f3f3f3; /* Light grey */
+        border-top: 10px solid #00b8ff; /* Blue */
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media only screen and (max-width : (@screen-sm - 1)) {
+    .c-loader {
+        &::before {
+            border: 6px solid #f3f3f3; /* Light grey */
+            border-top: 6px solid #00b8ff; /* Blue */
+            width: 25px;
+            height: 25px;
+        }
+    }
 }
