@@ -10,6 +10,10 @@ export const unsetPlayer = createAction('Remove player')
 export const unsetAllPlayers = createAction('Remove all players')
 export const setStats = createAction('Set stats')
 export const flagAsRemoved = createAction('Flag player as removed')
+export const setEnterSearchMode = createAction('Enter search mode')
+export const leaveSearchMode = createAction('Leave search mode')
+export const setEnterCommentMode = createAction('Leave comment mode')
+export const leaveCommentMode = createAction('Leave comment mode')
 
 export function addPlayer(playerId) {
     return (dispatch, state) => {
@@ -99,5 +103,26 @@ export function onInitialLoad(queryPlayers) {
                 }))
             })
         })
+    }
+}
+
+export function enterSearchMode() {
+    return (dispatch) => {
+        dispatch(leaveCommentMode())
+        dispatch(setEnterSearchMode())
+    }
+}
+
+export function enterCommentMode() {
+    return (dispatch) => {
+        dispatch(leaveSearchMode())
+        dispatch(setEnterCommentMode())
+    }
+}
+
+export function enterPlayerMode() {
+    return (dispatch) => {
+        dispatch(leaveSearchMode())
+        dispatch(leaveCommentMode())
     }
 }

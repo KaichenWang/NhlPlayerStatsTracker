@@ -20,7 +20,8 @@ class PlayerSearch extends React.Component {
             onSearchInputChange,
             addPlayer,
             addStats,
-            removePlayer
+            removePlayer,
+            leaveSearchMode
         } = this.props
 
         const onChange = (e) => {
@@ -47,28 +48,40 @@ class PlayerSearch extends React.Component {
                         className={'search__input form-control'}
                         onChange={onChange} />
                 </form>
-                {Object.keys(results).length > 0 &&
-                    <ul className={'search__result-group list-group'}>
-                        {Object.keys(results).map(function (key) {
-                            const result = results[key]
-                            return (
-                                <li className={'search__result-item'} key={result.id}>
-                                    <span className={'search__result-info'}>
-                                        <span> {result.firstName} </span>
-                                        <span>{result.lastName} </span>
-                                        <span>({result.team}) </span>
-                                    </span>
-                                    {
-                                        players[result.id] ?
-                                            <button className={'search__result-btn btn btn-danger btn-sm'} onClick={() => removePlayer(result.id)}>Remove</button>
-                                            :
-                                            <button className={'search__result-btn btn btn-success btn-sm'} onClick={() => onResultClick(result.id)}>Add</button>
-                                    }
-                                </li>
-                            )
-                        })}
-                    </ul>
-                }
+                <ul className={'search__result-group list-group'}>
+                    {Object.keys(results).map(function (key) {
+                        const result = results[key]
+                        return (
+                            <li className={'search__result-item'} key={result.id} onClick={() => {
+                                if (players[result.id]) {
+                                    removePlayer(result.id)
+                                }
+                                else {
+                                    onResultClick(result.id)
+                                }
+                            }}>
+                                <span className={players[result.id] ?
+                                    'search__result-info search__result-info--added'
+                                :
+                                    'search__result-info'
+                                }>
+                                    <span> {result.firstName} </span>
+                                    <span>{result.lastName} </span>
+                                    <span>({result.team}) </span>
+                                </span>
+                                {
+                                    players[result.id] ?
+                                        <i className={'search__check ti-minus'}></i>
+                                        :
+                                        <i className={'search__plus ti-plus'}></i>
+                                }
+                            </li>
+                        )
+                    })}
+                </ul>
+                <div className={'search__action'}>
+                    <button className={'btn btn-outline-primary btn--full-width'} onClick={leaveSearchMode}>Done</button>
+                </div>
             </div>
         )
     }
@@ -89,7 +102,8 @@ const mapDispatchToProps = {
     onSearchInputChange: actions.onSearchInputChange,
     addPlayer: appActions.addPlayer,
     addStats: appActions.addStats,
-    removePlayer: appActions.removePlayer
+    removePlayer: appActions.removePlayer,
+    leaveSearchMode: appActions.leaveSearchMode
 }
 
 export default connect(

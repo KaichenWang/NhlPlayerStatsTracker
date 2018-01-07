@@ -1,1 +1,2 @@
-export const MAX_PLAYERS = 5
+export const MAX_PLAYERS = 6
+export const DURATION_ANIMATION = 300

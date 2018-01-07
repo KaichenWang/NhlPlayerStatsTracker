@@ -4,7 +4,9 @@ import {  } from 'redux-little-router';
 
 const initialState = {
     players: {},
-    stats: {}
+    stats: {},
+    isSearchMode : false,
+    isCommentMode: false
 }
 
 export default createReducer({
@@ -48,6 +50,26 @@ export default createReducer({
                 ...state.stats,
                 ...stats
             }
+        })
+    },
+    [actions.setEnterSearchMode]: (state) => {
+        return Object.assign({}, state, {
+            isSearchMode: true
+        })
+    },
+    [actions.leaveSearchMode]: (state) => {
+        return Object.assign({}, state, {
+            isSearchMode: false
+        })
+    },
+    [actions.setEnterCommentMode]: (state) => {
+        return Object.assign({}, state, {
+            isCommentMode: true
+        })
+    },
+    [actions.leaveCommentMode]: (state) => {
+        return Object.assign({}, state, {
+            isCommentMode: false
         })
     }
 }, initialState)
