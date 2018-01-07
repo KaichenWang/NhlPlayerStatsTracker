@@ -79,9 +79,6 @@ class PlayerSearch extends React.Component {
                         )
                     })}
                 </ul>
-                <div className={'search__action'}>
-                    <button className={'btn btn-outline-primary btn--full-width'} onClick={leaveSearchMode}>Done</button>
-                </div>
             </div>
         )
     }

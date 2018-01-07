@@ -20,14 +20,24 @@ class App extends React.Component {
 
         return (
             <div className={'app'}>
-                <div className={'app__sidebar ' + classNameSearch}>
-                    <PlayerSearch/>
-                </div>
-                <div className={'app__content ' + classNameContent}>
-                    <PlayerCards/>
-                </div>
-                <div className={'app__sidebar ' + classNameComment}>
-                    <div className="fb-comments" data-href="https://www.nhltracker.com/" data-width="100%" data-numposts="10"></div>
+                <div className="app__main">
+                    <div className={'app__sidebar ' + classNameSearch}>
+                        <div className="app__sidebar-inner">
+                            <PlayerSearch/>
+                        </div>
+                    </div>
+                    <div className={'app__content ' + classNameContent}>
+                        <div className="app__content-inner">
+                            <PlayerCards/>
+                        </div>
+                    </div>
+                    <div className={'app__sidebar ' + classNameComment}>
+                        <div className="app__sidebar-inner">
+                            <div className="comments">
+                                <div className="fb-comments" data-href="http://www.pksubbantracker.com/" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <MenuBar/>
             </div>
