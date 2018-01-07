@@ -5,6 +5,9 @@ import { MAX_PLAYERS } from '../../constants'
 
 import { parseArrayToQuery } from '../../utils'
 
+import Cookies from 'universal-cookie'
+const cookies = new Cookies();
+
 export const setPlayer = createAction('Add player')
 export const unsetPlayer = createAction('Remove player')
 export const unsetAllPlayers = createAction('Remove all players')
@@ -19,11 +22,13 @@ export function addPlayer(playerId) {
     return (dispatch, state) => {
         if (Object.keys(state().app.players).length < MAX_PLAYERS) {
             dispatch(setPlayer(playerId))
+            const queryPlayers = parseArrayToQuery(Object.keys(state().app.players))
             dispatch(push({
                 query: {
-                    players: parseArrayToQuery(Object.keys(state().app.players))
+                    players: queryPlayers
                 }
             }))
+            cookies.set('path', queryPlayers)
         }
         else {
             alert('Max number of players is: ' + MAX_PLAYERS)
@@ -36,14 +41,20 @@ export function removePlayer(playerId) {
 
         dispatch(flagAsRemoved)
         dispatch(unsetPlayer(playerId))
-        const players = Object.keys(state().app.players).length > 0 ? parseArrayToQuery(Object.keys(state().app.players)) : undefined
+        const hasPlayers = Object.keys(state().app.players).length > 0
+        const queryPlayers = parseArrayToQuery(Object.keys(state().app.players))
+        const players = hasPlayers ? queryPlayers : undefined
         dispatch(push({
             query: {
                 players
             }
         }))
-
-
+        if (hasPlayers) {
+            cookies.set('path', queryPlayers)
+        }
+        else {
+            cookies.remove('path')
+        }
     }
 }
 
@@ -55,6 +66,7 @@ export function removeAllPlayers() {
                 players: undefined
             }
         }))
+        cookies.remove('path')
     }
 }
 

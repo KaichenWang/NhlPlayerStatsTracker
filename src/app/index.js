@@ -6,12 +6,14 @@ import thunkMiddleware from 'redux-thunk'
 import App from './containers/app/container'
 
 import reducers from './containers/reducers'
-import { routerForBrowser, initializeCurrentLocation } from 'redux-little-router';
+import { routerForBrowser, initializeCurrentLocation } from 'redux-little-router'
 import { onInitialLoad } from './containers/app/actions'
 
-import { push } from 'redux-little-router';
+import { push } from 'redux-little-router'
 
 import { MAX_PLAYERS } from './constants'
+
+import Cookies from 'universal-cookie'
 
 import { parseQueryToArray, parseArrayToQuery } from './utils'
 
@@ -56,8 +58,17 @@ let store = createStore(
 )
 
 const initialLocation = store.getState().router
+const cookies = new Cookies();
+let cookiePlayers
+if (!!initialLocation.query.players) {
+    cookies.set('path',initialLocation.query.players)
+}
+else {
+    cookiePlayers = cookies.get('path')
+}
+
 if (initialLocation) {
-    const queryPlayers = initialLocation.query.players
+    const queryPlayers = !!cookiePlayers ? cookiePlayers : initialLocation.query.players
     if(!!queryPlayers && queryPlayers.length > 0) {
         const playerIds = parseQueryToArray(queryPlayers)
         const limited =  playerIds.slice(0, MAX_PLAYERS)
