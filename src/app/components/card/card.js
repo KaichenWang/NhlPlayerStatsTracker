@@ -9,10 +9,8 @@ const Card = ({ player, stats, removePlayer }) => (
             <div className={ componentClass + '__info' }>
                 <img className={componentClass + '__image image'} src={'https://nhl.bamcontent.com/images/headshots/current/168x168/' + player.id +'.png'}/>
                 <div className={componentClass + '__name-container'}>
-                    <h5 className={ componentClass + '__name' }>{player.firstName + ' ' + player.lastName}</h5>
-                    <button type="button" className={ componentClass + '__remove btn btn-link' } aria-label="Remove" onClick={() => removePlayer(player.id)}>
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 className={ componentClass + '__name mt-2' }>{player.firstName + ' ' + player.lastName}</h5>
+                    <i className={componentClass + '__remove ti-close'} onClick={() => removePlayer(player.id)}></i>
                 </div>
             </div>
             <div className={ componentClass + '__stats' }>

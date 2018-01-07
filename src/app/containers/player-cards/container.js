@@ -14,7 +14,8 @@ class PlayerCards extends React.Component {
     render() {
         const {
             players,
-            stats
+            stats,
+            isSearchMode
         } = this.props.app
 
         const {
@@ -67,10 +68,12 @@ class PlayerCards extends React.Component {
                         })
                     }
 
-                    {Object.keys(queryPlayers).length < MAX_PLAYERS &&
-                        <div className="player-cards__add col-lg-4 col-md-6" onClick={enterSearchMode}>
-                            <i className="player-cards__add-icon ti-plus"></i>
-                            <h5 className="player-cards__add-label">Add Player</h5>
+                    {Object.keys(queryPlayers).length < MAX_PLAYERS && !isSearchMode &&
+                        <div className="player-cards__add col-sm-12 pt-2 pb-2">
+                            <div className="player-cards__add-inner" onClick={enterSearchMode}>
+                                <i className="player-cards__add-icon ti-plus"></i>
+                                <h5 className="player-cards__add-label mt-3">Add Player</h5>
+                            </div>
                         </div>
                     }
                 </ReactCSSTransitionGroup>
