@@ -17,6 +17,9 @@ export const setEnterSearchMode = createAction('Enter search mode')
 export const leaveSearchMode = createAction('Leave search mode')
 export const setEnterCommentMode = createAction('Leave comment mode')
 export const leaveCommentMode = createAction('Leave comment mode')
+export const clearNewPlayers = createAction('Clear new players')
+export const addNewPlayer = createAction('Add new player')
+export const removeNewPlayer = createAction('Remove new players')
 
 export function addPlayer(playerId) {
     return (dispatch, state) => {

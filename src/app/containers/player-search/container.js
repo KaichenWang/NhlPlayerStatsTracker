@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import * as actions from './actions'
 import * as appActions from '../app/actions'
 import { DebounceInput } from 'react-debounce-input'
+import { MAX_PLAYERS } from '../../constants'
 
 class PlayerSearch extends React.Component {
     render() {
@@ -21,7 +22,8 @@ class PlayerSearch extends React.Component {
             addPlayer,
             addStats,
             removePlayer,
-            leaveSearchMode
+            addNewPlayer,
+            removeNewPlayer
         } = this.props
 
         const onChange = (e) => {
@@ -31,6 +33,9 @@ class PlayerSearch extends React.Component {
 
         const onResultClick = (resultId) => {
             addPlayer(results[resultId])
+            if (Object.keys(players).length < MAX_PLAYERS) {
+                addNewPlayer(resultId)
+            }
             if (!stats[resultId]){
                 addStats(resultId)
             }
@@ -55,6 +60,7 @@ class PlayerSearch extends React.Component {
                             <li className={'search__result-item'} key={result.id} onClick={() => {
                                 if (players[result.id]) {
                                     removePlayer(result.id)
+                                    removeNewPlayer(result.id)
                                 }
                                 else {
                                     onResultClick(result.id)
@@ -100,7 +106,8 @@ const mapDispatchToProps = {
     addPlayer: appActions.addPlayer,
     addStats: appActions.addStats,
     removePlayer: appActions.removePlayer,
-    leaveSearchMode: appActions.leaveSearchMode
+    addNewPlayer: appActions.addNewPlayer,
+    removeNewPlayer: appActions.removeNewPlayer
 }
 
 export default connect(

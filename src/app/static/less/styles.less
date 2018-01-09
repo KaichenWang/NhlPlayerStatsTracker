@@ -387,6 +387,31 @@ table {
     margin-top: 5px;
 }
 
+.menu-bar__icon-container {
+    position: relative;
+}
+
+.menu-bar__notification {
+    position: absolute;
+    background-color: @brand-red;
+    color: @brand-white;
+    border-radius: 100px;
+    height: 25px;
+    min-width: 25px;
+    margin-top: -10px;
+    margin-left: -10px;
+    padding: 5px;
+    line-height: .9;
+}
+
+// desktop
+@media only screen and (min-width : (@screen-sm)) {
+    .menu-bar__notification {
+        display: none;
+    }
+}
+
+
 // mobile
 @media only screen and (max-width : (@screen-sm - 1)) {
     .menu-bar__label {

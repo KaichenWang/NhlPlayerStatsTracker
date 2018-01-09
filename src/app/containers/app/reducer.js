@@ -6,7 +6,8 @@ const initialState = {
     players: {},
     stats: {},
     isSearchMode : false,
-    isCommentMode: false
+    isCommentMode: false,
+    newPlayers: []
 }
 
 export default createReducer({
@@ -70,6 +71,27 @@ export default createReducer({
     [actions.leaveCommentMode]: (state) => {
         return Object.assign({}, state, {
             isCommentMode: false
+        })
+    },
+    [actions.clearNewPlayers]: (state) => {
+        return Object.assign({}, state, {
+            newPlayers: []
+        })
+    },
+    [actions.addNewPlayer]: (state, playerId) => {
+        return Object.assign({}, state, {
+            newPlayers: [
+                ...state.newPlayers,
+                playerId
+            ]
+        })
+    },
+    [actions.removeNewPlayer]: (state, playerId) => {
+        const i = state.newPlayers.indexOf(playerId)
+        let newPlayers = [...state.newPlayers]
+        newPlayers = newPlayers.filter(item => item !== playerId)
+        return Object.assign({}, state, {
+            newPlayers
         })
     }
 }, initialState)
