@@ -9,3 +9,9 @@ export const parseArrayToQuery = (a) => {
     })
     return str
 }
+
+
+export const getInitials = (name) => {
+    const initials = name.match(/\b\w/g) || [];
+    return ((initials.shift() || '') + (initials.pop() || '')).toUpperCase();
+}

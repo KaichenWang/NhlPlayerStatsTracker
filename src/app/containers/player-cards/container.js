@@ -15,7 +15,8 @@ class PlayerCards extends React.Component {
         const {
             players,
             stats,
-            isSearchMode
+            isSearchMode,
+            playerImages
         } = this.props.app
 
         const {
@@ -25,7 +26,8 @@ class PlayerCards extends React.Component {
         const {
             removePlayer,
             enterSearchMode,
-            leaveSearchMode
+            leaveSearchMode,
+            addPlayerImg
         } = this.props
 
         const queryPlayers = !!query.players && query.players.length > 0 ? parseQueryToArray(query.players) : []
@@ -34,6 +36,10 @@ class PlayerCards extends React.Component {
             if (e.currentTarget === e.target) {
                 leaveSearchMode()
             }
+        }
+
+        const onImgLoad = (playerId) => {
+            addPlayerImg(playerId)
         }
 
         return (
@@ -63,6 +69,8 @@ class PlayerCards extends React.Component {
                                     player={player}
                                     stats={stats[player.id]}
                                     removePlayer={removePlayer}
+                                    onImgLoad={onImgLoad}
+                                    isImgLoaded={playerImages.indexOf(player.id) !== -1}
                                 />
                             )
                         })
@@ -99,7 +107,8 @@ const mapDispatchToProps = {
     removePlayer: appActions.removePlayer,
     removeAllPlayers: appActions.removeAllPlayers,
     enterSearchMode: appActions.enterSearchMode,
-    leaveSearchMode: appActions.leaveSearchMode
+    leaveSearchMode: appActions.leaveSearchMode,
+    addPlayerImg: appActions.addPlayerImg
 }
 
 export default connect(

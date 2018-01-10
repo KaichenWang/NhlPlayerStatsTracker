@@ -20,6 +20,7 @@ export const leaveCommentMode = createAction('Leave comment mode')
 export const clearNewPlayers = createAction('Clear new players')
 export const addNewPlayer = createAction('Add new player')
 export const removeNewPlayer = createAction('Remove new players')
+export const addPlayerImg = createAction('Add player image')
 
 export function addPlayer(playerId) {
     return (dispatch, state) => {
@@ -75,7 +76,7 @@ export function removeAllPlayers() {
 
 export function addStats(playerId) {
     return (dispatch) => {
-        return fetch('https://statsapi.web.nhl.com/api/v1/people/' + playerId + '?expand=person.stats&stats=yearByYear&site=en_nhlCA')
+        fetch('https://statsapi.web.nhl.com/api/v1/people/' + playerId + '?expand=person.stats&stats=yearByYear&site=en_nhlCA')
             .then(
                 response => response.json(),
                 // Do not use catch, because that will also catch

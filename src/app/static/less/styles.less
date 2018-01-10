@@ -71,7 +71,7 @@ table {
     align-items: center;
 }
 
-.c-card__image {
+.c-card__head {
     border-radius: 100%;
     //border: @border-default;
     height: 90px;
@@ -85,6 +85,27 @@ table {
     //background: linear-gradient(135deg, #a81c77 0%,#d8b075 100%);
     background: @gradient-default;
     //border: @border-default;
+    overflow: hidden;
+}
+
+.c-card__image {
+    height: 100%;
+    width: 100%;
+}
+
+.c-card__initials {
+    position: absolute;
+    left:0;
+    right: 0;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    color: @white-faded;
+}
+
+.c-card__message {
+    color: @white-faded;
 }
 
 .c-card__stats {

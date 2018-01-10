@@ -1,13 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 const componentClass = 'c-card'
 
-const Card = ({ player, stats, removePlayer }) => (
+const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded }) => (
     <div className={ componentClass + ' col-lg-4 col-md-6 animated mb-4'}>
         <div className={ componentClass + '__inner'}>
             <div className={ componentClass + '__info' }>
-                <img className={componentClass + '__image image'} src={'https://nhl.bamcontent.com/images/headshots/current/168x168/' + player.id +'.png'}/>
+                    <div className={componentClass + '__head'}>
+                        <img
+                            onLoad={() => onImgLoad(player.id)}
+                            className={componentClass + '__image image ' +
+                                classNames(
+                                    {'image--loaded': isImgLoaded},
+                                    {'image--error d-none': !isImgLoaded}
+                                )
+                            }
+                            src={'https://nhl.bamcontent.com/images/headshots/current/168x168/' + player.id +'.png'}/>
+                        {!isImgLoaded &&
+                            <div className={componentClass + '__initials'}>{player.firstName.charAt(0)+player.lastName.charAt(0)}</div>
+                        }
+                    </div>
                 <div className={componentClass + '__name-container'}>
                     <h5 className={ componentClass + '__name mt-2' }>{player.firstName + ' ' + player.lastName}</h5>
                     <i className={componentClass + '__remove ti-close'} onClick={() => removePlayer(player.id)}></i>
@@ -44,6 +58,9 @@ const Card = ({ player, stats, removePlayer }) => (
                 :
                     <div className="c-loader p-4"></div>
                 }
+                {!!stats && !Object.keys(stats).length &&
+                    <span className={ componentClass + '__message d-block text-center mb-3'}>No Stats Available</span>
+                }
             </div>
         </div>
     </div>
@@ -52,7 +69,9 @@ const Card = ({ player, stats, removePlayer }) => (
 Card.propTypes = {
     player: PropTypes.object,
     stats: PropTypes.object,
-    removePlayer: PropTypes.func
+    removePlayer: PropTypes.func,
+    onImgLoad: PropTypes.func,
+    isImgLoaded: PropTypes.bool
 }
 
 export default Card

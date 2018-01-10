@@ -7,7 +7,8 @@ const initialState = {
     stats: {},
     isSearchMode : false,
     isCommentMode: false,
-    newPlayers: []
+    newPlayers: [],
+    playerImages: []
 }
 
 export default createReducer({
@@ -39,12 +40,12 @@ export default createReducer({
         })
     },
     [actions.setStats]: (state, payload) => {
-        const stats = {}
+        let stats = {}
         const allStats = payload.data.people[0].stats[0].splits
-        const currentStats = allStats.find((obj) => {
+        const currentSeason = allStats.find((obj) => {
             return obj.season === '20172018'
-        }).stat
-        stats[payload.playerId] = currentStats
+        })
+        stats[payload.playerId] = !currentSeason ? {} : currentSeason.stat
 
         return Object.assign({}, state, {
             stats: {
@@ -92,6 +93,15 @@ export default createReducer({
         newPlayers = newPlayers.filter(item => item !== playerId)
         return Object.assign({}, state, {
             newPlayers
+        })
+    },
+    [actions.addPlayerImg]: (state, playerId) => {
+        const playerImages = [
+            ...state.playerImages,
+            playerId
+        ]
+        return Object.assign({}, state, {
+            playerImages
         })
     }
 }, initialState)
