@@ -26,6 +26,11 @@ body,
     flex-grow: 1;
 }
 
+.c-card__data-title {
+    font-size: small;
+    color: @white-faded;
+}
+
 table {
     th,
     td {
@@ -113,6 +118,7 @@ table {
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
     width: 100%;
+    border-radius: 0 0 9px 9px;
 }
 
 .c-card__remove {
@@ -129,8 +135,6 @@ table {
 }
 
 .c-card__data {
-    font-size: small;
-
     th,
     td {
         white-space: nowrap;
@@ -468,4 +472,9 @@ table {
     height: 100%;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+}
+
+
+.carousel .slide {
+    background-color: transparent;
 }

@@ -21,7 +21,8 @@ export default createReducer({
                 id: info[0],
                 lastName: info[1],
                 firstName: info[2],
-                team: info[11]
+                team: info[11],
+                pos: info[12]
             }
         }
 

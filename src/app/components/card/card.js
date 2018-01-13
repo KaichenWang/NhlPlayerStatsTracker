@@ -33,37 +33,53 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded }) => (
                 <Carousel
                     infiniteLoop
                     emulateTouch
-                    showStatus={false}>
+                    showStatus={false}
+                    showIndicators={false}>
                 {!!stats && stats.slice(0).reverse().map((season, i) => {
                     return (
                         <div key={i}>
-                            <div>
+                            <div className={ componentClass + '__data-title'}>
                                 <span>{season.team.name}</span>
                             </div>
                             <table className={ componentClass + '__data table' }>
                             <thead>
-                            <tr>
-                            {Object.keys(season.stat).map(function (key) {
-                                const stat = season.stat[key]
-                                return (
-                                    <th key={key}>
-                                        {key.replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); })}
-                                    </th>
-                                )
-                            })}
-                            </tr>
+                                {player.pos !== 'G' ?
+                                    <tr>
+                                        <th>GP</th>
+                                        <th>G</th>
+                                        <th>A</th>
+                                        <th>P</th>
+                                        <th>+/-</th>
+                                    </tr>
+                                :
+                                    <tr>
+                                        <th>GP</th>
+                                        <th>Record</th>
+                                        <th>Sv%</th>
+                                        <th>GAA</th>
+                                        <th>SO</th>
+                                    </tr>
+                                }
                             </thead>
                             <tbody>
-                            <tr>
-                            {Object.keys(season.stat).map(function (key) {
-                                const stat = season.stat[key]
-                                return (
-                                    <td key={key}>
-                                        {stat}
-                                    </td>
-                                )
-                            })}
-                            </tr>
+                                {player.pos !== 'G' ?
+                                        <tr>
+                                            <th>{season.stat.games}</th>
+                                            <th>{season.stat.goals}</th>
+                                            <th>{season.stat.assists}</th>
+                                            <th>{season.stat.points}</th>
+                                            <th>{season.stat.plusMinus}</th>
+                                        </tr>
+                                    :
+
+                                    <tr>
+                                        <th>{season.stat.games}</th>
+                                        <th>{season.stat.wins + '-' + season.stat.losses + '-' + season.stat.ot}</th>
+                                        <th>{season.stat.savePercentage}</th>
+                                        <th>{season.stat.goalAgainstAverage}</th>
+                                        <th>{season.stat.shutouts}</th>
+                                    </tr>
+                                }
                             </tbody>
                             </table>
                         </div>

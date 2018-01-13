@@ -116,7 +116,8 @@ export function onInitialLoad(queryPlayers) {
                     id: data.id,
                     firstName: data.firstName,
                     lastName: data.lastName,
-                    team: data.nationality
+                    team: data.nationality,
+                    pos: data.primaryPosition.code
                 }
                 dispatch(setPlayer(player))
                 dispatch(setStats({
