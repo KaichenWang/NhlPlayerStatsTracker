@@ -1,10 +1,13 @@
 import {createAction} from 'redux-act'
 import fetch from 'cross-fetch'
 
+export const setQuery = createAction('Set search query')
 export const setResults = createAction('Set search results')
+export const setLoading = createAction('Set search results loading')
 
 export function onSearchInputChange(value) {
     return (dispatch) => {
+        dispatch(setLoading(true))
         return fetch('/search?value=' + value)
             .then(
                 response => response.json(),
@@ -16,6 +19,7 @@ export function onSearchInputChange(value) {
             )
             .then(json => {
                     dispatch(setResults(json))
+                    dispatch(setLoading(false))
                 }
             )
     }

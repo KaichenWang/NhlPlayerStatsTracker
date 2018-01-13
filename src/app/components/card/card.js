@@ -4,6 +4,8 @@ import classNames from 'classnames'
 
 const componentClass = 'c-card'
 
+import { Carousel } from 'react-responsive-carousel';
+
 const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded }) => (
     <div className={ componentClass + ' col-lg-4 col-md-6 animated mb-4'}>
         <div className={ componentClass + '__inner'}>
@@ -28,36 +30,51 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded }) => (
                 </div>
             </div>
             <div className={ componentClass + '__stats' }>
-                {!!stats ?
-                    <table className={ componentClass + '__data table' }>
-                        <thead>
-                        <tr>
-                            {Object.keys(stats).map(function (key) {
-                                const stat = stats[key]
+                <Carousel
+                    infiniteLoop
+                    emulateTouch
+                    showStatus={false}>
+                {!!stats && stats.slice(0).reverse().map((season, i) => {
+                    return (
+                        <div key={i}>
+                            <div>
+                                <span>{season.team.name}</span>
+                            </div>
+                            <table className={ componentClass + '__data table' }>
+                            <thead>
+                            <tr>
+                            {Object.keys(season.stat).map(function (key) {
+                                const stat = season.stat[key]
                                 return (
                                     <th key={key}>
                                         {key.replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); })}
                                     </th>
                                 )
                             })}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            {Object.keys(stats).map(function (key) {
-                                const stat = stats[key]
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            {Object.keys(season.stat).map(function (key) {
+                                const stat = season.stat[key]
                                 return (
                                     <td key={key}>
                                         {stat}
                                     </td>
                                 )
                             })}
-                        </tr>
-                        </tbody>
-                    </table>
-                :
+                            </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    )
+                })}
+                </Carousel>
+
+                {!stats &&
                     <div className="c-loader p-4"></div>
                 }
+
                 {!!stats && !Object.keys(stats).length &&
                     <span className={ componentClass + '__message d-block text-center mb-3'}>No Stats Available</span>
                 }
@@ -68,7 +85,7 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded }) => (
 
 Card.propTypes = {
     player: PropTypes.object,
-    stats: PropTypes.object,
+    stats: PropTypes.array,
     removePlayer: PropTypes.func,
     onImgLoad: PropTypes.func,
     isImgLoaded: PropTypes.bool

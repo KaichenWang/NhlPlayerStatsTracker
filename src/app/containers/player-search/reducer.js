@@ -2,10 +2,17 @@ import {createReducer} from 'redux-act'
 import * as actions from './actions'
 
 const initialState = {
-    results: {}
+    query: '',
+    results: {},
+    isResultsLoading: false
 }
 
 export default createReducer({
+    [actions.setQuery]: (state, query) => {
+        return Object.assign({}, state, {
+            query
+        })
+    },
     [actions.setResults]: (state, payload) => {
         const results = {}
         for (const str of payload.suggestions) {
@@ -20,6 +27,11 @@ export default createReducer({
 
         return Object.assign({}, state, {
             results
+        })
+    },
+    [actions.setLoading]: (state, isResultsLoading) => {
+        return Object.assign({}, state, {
+            isResultsLoading
         })
     }
 }, initialState)

@@ -1,6 +1,7 @@
 /* Imports */
 @import '_icons.less';
 @import '_variables.less';
+@import '_carousel.less';
 
 html,
 body,
@@ -191,15 +192,36 @@ table {
     flex-shrink: 0;
 }
 
+.search__form {
+    position: relative;
+}
+
 .search__input {
     border-radius: 0;
     padding: 20px 10px;
     border: 0;
     font-family: @font-primary;
     text-transform: uppercase;
+    padding-right: 35px;
 }
 
+.search__clear {
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: @gray-light;
 
+    &:hover {
+        color: @brand-blue;
+    }
+}
+
+.search__result-item--empty {
+    color:@white-faded;
+}
 
 .page-title-container {
     padding: 20px;

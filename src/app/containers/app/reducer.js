@@ -1,6 +1,7 @@
 import {createReducer} from 'redux-act'
 import * as actions from './actions'
 import {  } from 'redux-little-router';
+import { TEAMS } from '../../constants';
 
 const initialState = {
     players: {},
@@ -8,7 +9,10 @@ const initialState = {
     isSearchMode : false,
     isCommentMode: false,
     newPlayers: [],
-    playerImages: []
+    playerImages: [],
+    teams: TEAMS,
+    isModalOpen: false,
+    modalContent: {}
 }
 
 export default createReducer({
@@ -42,10 +46,10 @@ export default createReducer({
     [actions.setStats]: (state, payload) => {
         let stats = {}
         const allStats = payload.data.people[0].stats[0].splits
-        const currentSeason = allStats.find((obj) => {
+        const currentSeason = allStats.filter((obj) => {
             return obj.season === '20172018'
-        })
-        stats[payload.playerId] = !currentSeason ? {} : currentSeason.stat
+        });
+        stats[payload.playerId] = currentSeason
 
         return Object.assign({}, state, {
             stats: {
@@ -102,6 +106,16 @@ export default createReducer({
         ]
         return Object.assign({}, state, {
             playerImages
+        })
+    },
+    [actions.setModalOpen]: (state, shouldOpen) => {
+        return Object.assign({}, state, {
+            isModalOpen: shouldOpen
+        })
+    },
+    [actions.setModalContent]: (state, modalContent) => {
+        return Object.assign({}, state, {
+            modalContent
         })
     }
 }, initialState)

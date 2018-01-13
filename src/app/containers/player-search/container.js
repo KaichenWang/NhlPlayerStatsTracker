@@ -10,15 +10,19 @@ class PlayerSearch extends React.Component {
     render() {
         const {
             players,
-            stats
+            stats,
+            isSearchMode
         } = this.props.app
 
         const {
-            results
+            query,
+            results,
+            isResultsLoading
         } = this.props.playerSearch
 
         const {
             onSearchInputChange,
+            setQuery,
             addPlayer,
             addStats,
             removePlayer,
@@ -28,7 +32,9 @@ class PlayerSearch extends React.Component {
 
         const onChange = (e) => {
             e.persist()
-            onSearchInputChange(e.target.value)
+            const val = e.target.value
+            onSearchInputChange(val)
+            setQuery(val)
         }
 
         const onResultClick = (resultId) => {
@@ -41,20 +47,34 @@ class PlayerSearch extends React.Component {
             }
         }
 
+        const onClear = () => {
+            const input = this.input
+            input.value = ''
+            input.focus()
+        }
+
         return (
             <div className={'search'}>
-                <form onSubmit={e => { e.preventDefault(); }} autoComplete="off">
-                    <DebounceInput
-                        type="text"
-                        debounceTimeout={500}
-                        placeholder="Enter NHL player name"
-                        name="search"
-                        autoComplete="false"
-                        className={'search__input form-control'}
-                        onChange={onChange} />
+                <form onSubmit={e => { e.preventDefault(); }} autoComplete="off" className="search__form">
+                    {isSearchMode &&
+                        <DebounceInput
+                            type="text"
+                            debounceTimeout={500}
+                            placeholder="Enter NHL player name"
+                            name="search"
+                            autoComplete="off"
+                            className={'search__input form-control'}
+                            onChange={onChange}
+                            autoFocus
+                            inputRef={(input) => this.input = input} />
+                    }
+                    {query !== '' &&
+                        <i className="ti-close search__clear" title="Clear search" onClick={onClear}></i>
+                    }
+
                 </form>
                 <ul className={'search__result-group list-group'}>
-                    {Object.keys(results).map(function (key) {
+                    {!isResultsLoading && Object.keys(results).map(function (key) {
                         const result = results[key]
                         return (
                             <li className={'search__result-item'} key={result.id} onClick={() => {
@@ -77,13 +97,19 @@ class PlayerSearch extends React.Component {
                                 </span>
                                 {
                                     players[result.id] ?
-                                        <i className={'search__check ti-minus'}></i>
+                                        <i className={'search__check ti-minus'} title="Remove player"></i>
                                         :
-                                        <i className={'search__plus ti-plus'}></i>
+                                        <i className={'search__plus ti-plus'} title="Add player"></i>
                                 }
                             </li>
                         )
                     })}
+                    {isResultsLoading &&
+                        <div className="c-loader mt-3"></div>
+                    }
+                    {query !== '' && Object.keys(results).length === 0 && !isResultsLoading &&
+                        <li className={'search__result-item--empty text-center mt-3 mb-3'}>No Results</li>
+                    }
                 </ul>
             </div>
         )
@@ -103,6 +129,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     onSearchInputChange: actions.onSearchInputChange,
+    setQuery: actions.setQuery,
     addPlayer: appActions.addPlayer,
     addStats: appActions.addStats,
     removePlayer: appActions.removePlayer,

@@ -1,7 +1,7 @@
 import {createAction} from 'redux-act'
 import fetch from 'cross-fetch'
 import { push } from 'redux-little-router';
-import { MAX_PLAYERS } from '../../constants'
+import { MAX_PLAYERS, MESSAGE_MAX_PLAYER } from '../../constants'
 
 import { parseArrayToQuery } from '../../utils'
 
@@ -21,6 +21,9 @@ export const clearNewPlayers = createAction('Clear new players')
 export const addNewPlayer = createAction('Add new player')
 export const removeNewPlayer = createAction('Remove new players')
 export const addPlayerImg = createAction('Add player image')
+export const setModalOpen = createAction('Set modal open')
+export const setModalContent = createAction('Set modal content')
+
 
 export function addPlayer(playerId) {
     return (dispatch, state) => {
@@ -35,7 +38,10 @@ export function addPlayer(playerId) {
             cookies.set('path', queryPlayers)
         }
         else {
-            alert('Max number of players is: ' + MAX_PLAYERS)
+            dispatch(setModalContent({
+                content: MESSAGE_MAX_PLAYER
+            }))
+            dispatch(setModalOpen(true))
         }
     }
 }
