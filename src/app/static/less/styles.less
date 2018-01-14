@@ -18,6 +18,7 @@ body,
     overflow: hidden;
     font-family: @font-primary;
     text-transform: uppercase;
+    background: @gray-dark;
 }
 
 
@@ -31,6 +32,11 @@ body,
     color: @white-faded;
 }
 
+.c-card__data-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 table {
     th,
     td {
@@ -40,6 +46,8 @@ table {
 
     thead th {
         border-bottom: @border-default !important;
+        font-size: small;
+        color: @white-faded;
     }
 }
 
@@ -266,17 +274,23 @@ table {
 
 .player-cards {
     padding: 20px;
-    overflow-y: scroll;
-    height: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .player-cards__row {
     align-items: center;
     justify-content: center;
+    position: relative;
+    width: 100%;
 }
 
 .player-cards__add {
-   text-align: center;
+    text-align: center;
+    position: absolute;
+    bottom: -120px;
 }
 
 .player-cards__add-inner {
@@ -309,6 +323,21 @@ table {
     flex-direction: column;
 }
 
+.app__fullscreen {
+    position: absolute;
+    color: @gray-light;
+    font-size: x-large;
+    cursor: pointer;
+    padding: 5px;
+    left:0;
+    top:0;
+    z-index: 1;
+
+    &:hover {
+        color: @brand-blue;
+    }
+}
+
 .app__main {
     margin:0;
     padding:0;
@@ -317,7 +346,6 @@ table {
     font-size:100%;
     height: 100%;
     width: 100%;
-    background: @gray-dark;
     //overflow-y: scroll;
     //-webkit-overflow-scrolling: touch;
     display: flex;
@@ -347,6 +375,11 @@ table {
     height: 100%;
 }
 
+.app__content-inner {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
 
 // mobile
 @media only screen and (max-width : (@screen-sm - 1)) {
@@ -477,4 +510,5 @@ table {
 
 .carousel .slide {
     background-color: transparent;
+    padding: 0 20px;
 }

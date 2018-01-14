@@ -22,7 +22,7 @@ class MenuBar extends React.Component {
         const classNamePlayer = !isSearchMode &&  !isCommentMode ? 'menu-bar__item--active' : ''
 
         return (
-            <div className="menu-bar">
+            <div className="menu-bar animated">
                 <div className={'menu-bar__item ' + classNameSearch} onClick={enterSearchMode}>
                     <i className="ti-search menu-bar__icon"></i>
                     <span className="menu-bar__label">Player Search</span>

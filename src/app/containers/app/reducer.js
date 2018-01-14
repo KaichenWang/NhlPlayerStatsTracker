@@ -3,6 +3,9 @@ import * as actions from './actions'
 import {  } from 'redux-little-router';
 import { TEAMS } from '../../constants';
 
+import Cookies from 'universal-cookie'
+const cookies = new Cookies();
+
 const initialState = {
     players: {},
     stats: {},
@@ -12,7 +15,8 @@ const initialState = {
     playerImages: [],
     teams: TEAMS,
     isModalOpen: false,
-    modalContent: {}
+    modalContent: {},
+    isFullscreenMode: false
 }
 
 export default createReducer({
@@ -117,7 +121,13 @@ export default createReducer({
         return Object.assign({}, state, {
             modalContent
         })
-    }
+    },
+    [actions.setFullscreenMode]: (state, isFullscreenMode) => {
+        cookies.set('fullscreen', isFullscreenMode)
+        return Object.assign({}, state, {
+            isFullscreenMode
+        })
+    },
 }, initialState)
 
 

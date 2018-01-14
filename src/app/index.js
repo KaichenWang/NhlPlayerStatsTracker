@@ -7,7 +7,7 @@ import App from './containers/app/container'
 
 import reducers from './containers/reducers'
 import { routerForBrowser, initializeCurrentLocation } from 'redux-little-router'
-import { onInitialLoad } from './containers/app/actions'
+import { onInitialLoad, setFullscreenMode } from './containers/app/actions'
 
 import { push } from 'redux-little-router'
 
@@ -57,6 +57,13 @@ let store = createStore(
     )
 )
 
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('app')
+)
+
 const initialLocation = store.getState().router
 const cookies = new Cookies();
 let cookiePlayers
@@ -66,7 +73,6 @@ if (!!initialLocation.query.players) {
 else {
     cookiePlayers = cookies.get('path')
 }
-
 if (initialLocation) {
     const queryPlayers = !!cookiePlayers ? cookiePlayers : initialLocation.query.players
     if(!!queryPlayers && queryPlayers.length > 0) {
@@ -85,10 +91,7 @@ if (initialLocation) {
         }))
     }
 }
-
-render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('app')
-)
+const cookieFullscreen = cookies.get('fullscreen')
+if (!!cookieFullscreen) {
+    store.dispatch(setFullscreenMode(cookieFullscreen !== "false"))
+}

@@ -6,17 +6,23 @@ import MenuBar from '../menu-bar/container'
 import Modal from 'react-responsive-modal'
 import * as actions from './actions'
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 class App extends React.Component {
     render() {
         const {
             isSearchMode,
             isCommentMode,
             isModalOpen,
-            modalContent
+            modalContent,
+            isFullscreenMode
         } = this.props.app
 
         const {
-            setModalOpen
+            setModalOpen,
+            setFullscreenMode,
+            leaveSearchMode,
+            leaveCommentMode
         } = this.props
 
         const classNameSearch = isSearchMode ? 'sidebar--open' : 'sidebar--closed'
@@ -33,6 +39,22 @@ class App extends React.Component {
                     </div>
                     <div className={'app__content ' + classNameContent}>
                         <div className="app__content-inner">
+                            <div className="app__fullscreen" onClick={() => {
+                                if(isFullscreenMode) {
+                                    setFullscreenMode(false)
+                                }
+                                else {
+                                    setFullscreenMode(true)
+                                    leaveSearchMode()
+                                    leaveCommentMode()
+                                }
+                            }}>
+                                {!isFullscreenMode ?
+                                    <i className="ti-arrows-corner" title="Enter fullscreen"></i>
+                                    :
+                                    <i className="ti-layout-media-overlay-alt" title="Exit fullscreen"></i>
+                                }
+                            </div>
                             <PlayerCards/>
                         </div>
                     </div>
@@ -44,7 +66,19 @@ class App extends React.Component {
                         </div>
                     </div>
                 </div>
-                <MenuBar/>
+                <ReactCSSTransitionGroup
+                    transitionName={{
+                        enter: 'zoomIn',
+                        leave: 'zoomOut'
+                    }}
+                    transitionEnterTimeout={1000}
+                    transitionLeaveTimeout={200}
+                >
+                    {!isFullscreenMode&&
+                        <MenuBar/>
+                    }
+                </ReactCSSTransitionGroup>
+
                 <Modal open={isModalOpen} onClose={() => {setModalOpen(false)}} little>
                     <div className="mt-5 mb-2">{modalContent.content}</div>
                 </Modal>
@@ -60,7 +94,10 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    setModalOpen: actions.setModalOpen
+    setModalOpen: actions.setModalOpen,
+    setFullscreenMode: actions.setFullscreenMode,
+    leaveSearchMode: actions.leaveSearchMode,
+    leaveCommentMode: actions.leaveCommentMode
 }
 
 export default connect(

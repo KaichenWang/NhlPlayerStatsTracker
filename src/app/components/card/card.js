@@ -6,9 +6,9 @@ const componentClass = 'c-card'
 
 import { Carousel } from 'react-responsive-carousel';
 
-const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded }) => (
+const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick }) => (
     <div className={ componentClass + ' col-lg-4 col-md-6 animated mb-4'}>
-        <div className={ componentClass + '__inner'}>
+        <div className={ componentClass + '__inner'} onClick={onClick}>
             <div className={ componentClass + '__info' }>
                     <div className={componentClass + '__head'}>
                         <img
@@ -41,47 +41,49 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded }) => (
                             <div className={ componentClass + '__data-title'}>
                                 <span>{season.team.name}</span>
                             </div>
-                            <table className={ componentClass + '__data table' }>
-                            <thead>
-                                {player.pos !== 'G' ?
-                                    <tr>
-                                        <th>GP</th>
-                                        <th>G</th>
-                                        <th>A</th>
-                                        <th>P</th>
-                                        <th>+/-</th>
-                                    </tr>
-                                :
-                                    <tr>
-                                        <th>GP</th>
-                                        <th>Record</th>
-                                        <th>Sv%</th>
-                                        <th>GAA</th>
-                                        <th>SO</th>
-                                    </tr>
-                                }
-                            </thead>
-                            <tbody>
-                                {player.pos !== 'G' ?
+                            <div className={ componentClass + '__data-container'}>
+                                <table className={ componentClass + '__data table' }>
+                                <thead>
+                                    {player.pos !== 'G' ?
                                         <tr>
-                                            <th>{season.stat.games}</th>
-                                            <th>{season.stat.goals}</th>
-                                            <th>{season.stat.assists}</th>
-                                            <th>{season.stat.points}</th>
-                                            <th>{season.stat.plusMinus}</th>
+                                            <th>GP</th>
+                                            <th>G</th>
+                                            <th>A</th>
+                                            <th>P</th>
+                                            <th>+/-</th>
                                         </tr>
                                     :
+                                        <tr>
+                                            <th>GP</th>
+                                            <th>Record</th>
+                                            <th>Sv%</th>
+                                            <th>GAA</th>
+                                            <th>SO</th>
+                                        </tr>
+                                    }
+                                </thead>
+                                <tbody>
+                                    {player.pos !== 'G' ?
+                                            <tr>
+                                                <th>{season.stat.games}</th>
+                                                <th>{season.stat.goals}</th>
+                                                <th>{season.stat.assists}</th>
+                                                <th>{season.stat.points}</th>
+                                                <th>{season.stat.plusMinus}</th>
+                                            </tr>
+                                        :
 
-                                    <tr>
-                                        <th>{season.stat.games}</th>
-                                        <th>{season.stat.wins + '-' + season.stat.losses + '-' + season.stat.ot}</th>
-                                        <th>{season.stat.savePercentage}</th>
-                                        <th>{season.stat.goalAgainstAverage}</th>
-                                        <th>{season.stat.shutouts}</th>
-                                    </tr>
-                                }
-                            </tbody>
-                            </table>
+                                        <tr>
+                                            <th>{season.stat.games}</th>
+                                            <th>{season.stat.wins + '-' + season.stat.losses + '-' + season.stat.ot}</th>
+                                            <th>{season.stat.savePercentage}</th>
+                                            <th>{season.stat.goalAgainstAverage}</th>
+                                            <th>{season.stat.shutouts}</th>
+                                        </tr>
+                                    }
+                                </tbody>
+                                </table>
+                            </div>
                         </div>
                     )
                 })}
@@ -104,7 +106,8 @@ Card.propTypes = {
     stats: PropTypes.array,
     removePlayer: PropTypes.func,
     onImgLoad: PropTypes.func,
-    isImgLoaded: PropTypes.bool
+    isImgLoaded: PropTypes.bool,
+    onClick: PropTypes.func
 }
 
 export default Card
