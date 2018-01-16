@@ -9,11 +9,11 @@ var parseString = require('xml2js').parseString;
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
-app.get('*.js', function (req, res, next) {
-    req.url = req.url + '.gz';
-    res.set('Content-Encoding', 'gzip');
-    next();
-});
+// app.get('*.js', function (req, res, next) {
+//     req.url = req.url + '.gz';
+//     res.set('Content-Encoding', 'gzip');
+//     next();
+// });
 
 app.get('/player/pksubban', function (req, res) {
     var url = 'http://www.tsn.ca/mobile/bbcard.aspx?hub=NHL&name=PK+SUBBAN';
