@@ -1,0 +1,52 @@
+/*
+/* Container - Cards
+/*/
+
+.player-cards {
+    padding: 20px;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-cards__row {
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.player-cards__add {
+    text-align: center;
+    position: absolute;
+    bottom: -120px;
+}
+
+.player-cards__add-inner {
+    padding: 10px;
+    color: @gray-light;
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover {
+        color: @brand-blue;
+    }
+}
+
+.player-cards__add-icon {
+    text-align: center;
+    font-size: 42px;
+}
+
+.player-cards__add-label {
+    font-family: @font-primary;
+    text-transform: uppercase;
+}
+
+
+.player-cards__action {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+}

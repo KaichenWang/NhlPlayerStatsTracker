@@ -41,7 +41,7 @@ module.exports = function(grunt) {
             //     }
             // },
             less: {
-                files: ['src/app/static/less/*.less', 'src/app/static/css/*.css'],
+                files: ['src/app/**/*.less', 'src/app/static/css/*.css'],
                 tasks: ['less', 'postcss', 'cssmin'],
                 options: {
                     debounceDelay: 250

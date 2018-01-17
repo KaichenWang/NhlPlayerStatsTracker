@@ -1,0 +1,116 @@
+/*
+/* Component - Card
+/*/
+
+.c-card {
+    min-height: 100%;
+    flex-grow: 1;
+}
+
+.c-card__data-title {
+    font-size: small;
+    color: @white-faded;
+}
+
+.c-card__data-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.c-card__inner {
+    //background: @brand-white;
+    border: @border-default;
+    margin-top: 50px;
+    border-radius: 10px;
+    color: white;
+}
+
+.c-card__info {
+    display: flex;
+    align-items: center;
+    //background-color: #dadada;
+    padding: 10px;
+    position: relative;
+    border-radius: 9px 9px 0 0;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+.c-card__name {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-transform: uppercase;
+    font-family: @font-primary;
+    text-align: center;
+}
+
+.c-card__name-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.c-card__head {
+    border-radius: 100%;
+    //border: @border-default;
+    height: 90px;
+    width: 90px;
+    //flex-shrink: 0;
+    position: absolute;
+    //left: 50%;
+    top: 0;
+    transform: translateY(-50%);
+    box-shadow: 0px 1px 0px 1px rgba(0,0,0,0,5);
+    //background: linear-gradient(135deg, #a81c77 0%,#d8b075 100%);
+    background: @gradient-default;
+    //border: @border-default;
+    overflow: hidden;
+}
+
+.c-card__image {
+    height: 100%;
+    width: 100%;
+}
+
+.c-card__initials {
+    position: absolute;
+    left:0;
+    right: 0;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    color: @white-faded;
+}
+
+.c-card__message {
+    color: @white-faded;
+}
+
+.c-card__stats {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    border-radius: 0 0 9px 9px;
+}
+
+.c-card__remove {
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 10px;
+    color: @gray-light;
+
+    &:hover {
+        color: @brand-blue;
+    }
+}
+
+.c-card__data {
+    th,
+    td {
+        white-space: nowrap;
+    }
+}
