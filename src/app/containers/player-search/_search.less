@@ -3,10 +3,14 @@
 /*/
 
 .search {
-    height: 100%;
     background: @gradient-default;
     display: flex;
     flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .search__result-item {
@@ -35,7 +39,7 @@
 .search__result-group {
     display: inline-block;
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     flex-grow: 1;
 }
 
@@ -54,6 +58,7 @@
 
 .search__form {
     position: relative;
+    flex-shrink: 0;
 }
 
 .search__input {

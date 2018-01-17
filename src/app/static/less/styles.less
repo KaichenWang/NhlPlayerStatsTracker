@@ -15,8 +15,7 @@
 
 html,
 body,
-#app,
-.app {
+#app {
     margin:0;
     padding:0;
     border:0;
@@ -106,9 +105,13 @@ table {
 .comments {
     background: @gray-lighter;
     padding: 10px;
-    height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .carousel .slide {

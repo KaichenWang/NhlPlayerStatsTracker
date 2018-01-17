@@ -37,34 +37,32 @@ class App extends React.Component {
                             <PlayerSearch/>
                         </div>
                     </div>
-                    {/*<div className={'app__content ' + classNameContent}>*/}
-                        {/*<div className="app__content-inner">*/}
-                            {/*<div className="app__fullscreen" onClick={() => {*/}
-                                {/*if(isFullscreenMode) {*/}
-                                    {/*setFullscreenMode(false)*/}
-                                {/*}*/}
-                                {/*else {*/}
-                                    {/*setFullscreenMode(true)*/}
-                                    {/*leaveSearchMode()*/}
-                                    {/*leaveCommentMode()*/}
-                                {/*}*/}
-                            {/*}}>*/}
-                                {/*{!isFullscreenMode ?*/}
-                                    {/*<i className="ti-arrows-corner" title="Enter fullscreen"></i>*/}
-                                    {/*:*/}
-                                    {/*<i className="ti-layout-media-overlay-alt" title="Exit fullscreen"></i>*/}
-                                {/*}*/}
-                            {/*</div>*/}
-                            {/*<PlayerCards/>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                    {/*<div className={'app__sidebar ' + classNameComment}>*/}
-                        {/*<div className="app__sidebar-inner">*/}
-                            {/*<div className="comments">*/}
-                                {/*<div className="fb-comments" data-href="http://www.pksubbantracker.com/" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>*/}
-                            {/*</div>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
+                    <div className={'app__content ' + classNameContent}>
+                        <div className="app__fullscreen" onClick={() => {
+                            if(isFullscreenMode) {
+                                setFullscreenMode(false)
+                            }
+                            else {
+                                setFullscreenMode(true)
+                                leaveSearchMode()
+                                leaveCommentMode()
+                            }
+                        }}>
+                            {!isFullscreenMode ?
+                                <i className="ti-arrows-corner" title="Enter fullscreen"></i>
+                                :
+                                <i className="ti-layout-media-overlay-alt" title="Exit fullscreen"></i>
+                            }
+                        </div>
+                        <PlayerCards/>
+                    </div>
+                    <div className={'app__sidebar ' + classNameComment}>
+                        <div className="app__sidebar-inner">
+                            <div className="comments">
+                                <div className="fb-comments" data-href="http://www.pksubbantracker.com/" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <ReactCSSTransitionGroup
                     transitionName={{
@@ -73,6 +71,7 @@ class App extends React.Component {
                     }}
                     transitionEnterTimeout={1000}
                     transitionLeaveTimeout={200}
+                    className="app__bottom"
                 >
                     {!isFullscreenMode&&
                         <MenuBar/>
