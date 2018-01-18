@@ -7,8 +7,12 @@ const componentClass = 'c-card'
 import { Carousel } from 'react-responsive-carousel';
 
 const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick }) => (
-    <div className={ componentClass + ' col-lg-4 col-md-6 animated mb-4'}>
+    <div className={ componentClass + ' animated'}>
+        <div className={ componentClass + '__background'}
+             style={{'background-image': 'url("https://nhl.bamcontent.com/images/actionshots/' + player.id + '.jpg")'}}>
+        </div>
         <div className={ componentClass + '__inner'} onClick={onClick}>
+            <i className={componentClass + '__remove ti-close'} onClick={() => removePlayer(player.id)}></i>
             <div className={ componentClass + '__info' }>
                     <div className={componentClass + '__head'}>
                         <img
@@ -19,14 +23,13 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick }) 
                                     {'image--error d-none': !isImgLoaded}
                                 )
                             }
-                            src={'https://nhl.bamcontent.com/images/headshots/current/168x168/' + player.id +'.png'}/>
+                            src={'https://nhl.bamcontent.com/images/headshots/current/168x168/' + player.id + '.png'}/>
                         {!isImgLoaded &&
                             <div className={componentClass + '__initials'}>{player.firstName.charAt(0)+player.lastName.charAt(0)}</div>
                         }
                     </div>
                 <div className={componentClass + '__name-container'}>
                     <h5 className={ componentClass + '__name mt-2' }>{player.firstName + ' ' + player.lastName}</h5>
-                    <i className={componentClass + '__remove ti-close'} onClick={() => removePlayer(player.id)}></i>
                 </div>
             </div>
             <div className={ componentClass + '__stats' }>

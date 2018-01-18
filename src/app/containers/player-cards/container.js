@@ -61,35 +61,79 @@ class PlayerCards extends React.Component {
                     className="row player-cards__row"
                 >
                     {queryPlayers.map(function (key) {
+                            const count = queryPlayers.length
                             const player = players[key]
-                            return (
-                                player &&
-                                <Card
-                                    key={player.id}
-                                    player={player}
-                                    stats={stats[player.id]}
-                                    removePlayer={removePlayer}
-                                    onImgLoad={onImgLoad}
-                                    isImgLoaded={playerImages.indexOf(player.id) !== -1}
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                    }}
-                                />
-                            )
+
+                            if (count % 3 === 0 || count % 2 !== 0 && count > 3) {
+                                return (
+                                    player &&
+                                    <div className="col-sm-12 col-md-6 col-lg-4 player-cards__box">
+                                        <Card
+                                            key={player.id}
+                                            player={player}
+                                            stats={stats[player.id]}
+                                            removePlayer={removePlayer}
+                                            onImgLoad={onImgLoad}
+                                            isImgLoaded={playerImages.indexOf(player.id) !== -1}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                            }}
+                                        />
+                                    </div>
+
+                                )
+                            }
+                            else if (count % 2 === 0) {
+                                return (
+                                    player &&
+                                    <div className="col-sm-12 col-md-6 player-cards__box">
+                                        <Card
+                                            key={player.id}
+                                            player={player}
+                                            stats={stats[player.id]}
+                                            removePlayer={removePlayer}
+                                            onImgLoad={onImgLoad}
+                                            isImgLoaded={playerImages.indexOf(player.id) !== -1}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                            }}
+                                        />
+                                    </div>
+                                )
+                            }
+                            else if (count === 1) {
+                                return (
+                                    player &&
+                                    <div className="col-sm-12 player-cards__box">
+                                        <Card
+                                            key={player.id}
+                                            player={player}
+                                            stats={stats[player.id]}
+                                            removePlayer={removePlayer}
+                                            onImgLoad={onImgLoad}
+                                            isImgLoaded={playerImages.indexOf(player.id) !== -1}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                            }}
+                                        />
+                                    </div>
+                                )
+                            }
                         })
                     }
 
-                    {Object.keys(queryPlayers).length < MAX_PLAYERS && !isSearchMode && !isFullscreenMode &&
-                        <div className="player-cards__add col-sm-12 pt-2 pb-2">
-                            <div className="player-cards__add-inner" onClick={(e) => {
-                                e.stopPropagation()
-                                enterSearchMode()
-                            }}>
-                                <i className="player-cards__add-icon ti-plus"></i>
-                                <h5 className="player-cards__add-label mt-3">Add Player</h5>
-                            </div>
-                        </div>
-                    }
+
+                    {/*{Object.keys(queryPlayers).length < MAX_PLAYERS && !isSearchMode && !isFullscreenMode &&*/}
+                        {/*<div className="player-cards__add col-sm-12 pt-2 pb-2">*/}
+                            {/*<div className="player-cards__add-inner" onClick={(e) => {*/}
+                                {/*e.stopPropagation()*/}
+                                {/*enterSearchMode()*/}
+                            {/*}}>*/}
+                                {/*<i className="player-cards__add-icon ti-plus"></i>*/}
+                                {/*<h5 className="player-cards__add-label mt-3">Add Player</h5>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
+                    {/*}*/}
                 </ReactCSSTransitionGroup>
 
                 {/*{Object.keys(players).length > 0 &&*/}
