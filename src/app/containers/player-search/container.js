@@ -60,7 +60,7 @@ class PlayerSearch extends React.Component {
                         <DebounceInput
                             type="text"
                             debounceTimeout={500}
-                            placeholder="Enter NHL player name"
+                            placeholder="Search by player name"
                             name="search"
                             autoComplete="off"
                             className={'search__input form-control'}

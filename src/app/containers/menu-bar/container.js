@@ -24,8 +24,8 @@ class MenuBar extends React.Component {
         return (
             <div className="menu-bar animated">
                 <div className={'menu-bar__item ' + classNameSearch} onClick={enterSearchMode}>
-                    <i className="ti-search menu-bar__icon"></i>
-                    <span className="menu-bar__label">Player Search</span>
+                    <i className="ti-plus menu-bar__icon"></i>
+                    <span className="menu-bar__label">Add Player</span>
                 </div>
                 <div className={'menu-bar__item ' + classNamePlayer} onClick={() => {
                     clearNewPlayers()

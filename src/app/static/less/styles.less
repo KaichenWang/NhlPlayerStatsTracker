@@ -35,12 +35,20 @@ table {
     td {
         border-top: 0 !important;
         border-bottom: 0 !important;
+        flex-grow: 1;
+        width: 20%;
     }
 
     thead th {
         border-bottom: @border-default !important;
         font-size: small;
         color: @white-faded;
+    }
+
+    tr {
+        display: flex;
+        align-items: stretch;
+        justify-content: stretch;
     }
 }
 
