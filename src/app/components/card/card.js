@@ -6,13 +6,17 @@ const componentClass = 'c-card'
 
 import { Carousel } from 'react-responsive-carousel';
 
-const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick }) => (
-    <div className={ componentClass + ' animated'}>
+const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, isFullscreenMode}) => (
+    <div className={ componentClass }>
         <div className={ componentClass + '__background'}
              style={{'background-image': 'url("https://nhl.bamcontent.com/images/actionshots/' + player.id + '.jpg")'}}>
         </div>
         <div className={ componentClass + '__inner'} onClick={onClick}>
-            <i className={componentClass + '__remove ti-close'} onClick={() => removePlayer(player.id)}></i>
+            <i className={componentClass + '__remove ti-close ' +
+                classNames(
+                    {'c-card__remove-faded': isFullscreenMode}
+                )} onClick={() => removePlayer(player.id)}>
+            </i>
             <div className={ componentClass + '__info' }>
                     <div className={componentClass + '__head'}>
                         <img
@@ -37,7 +41,8 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick }) 
                     infiniteLoop
                     emulateTouch
                     showStatus={false}
-                    showIndicators={false}>
+                    showIndicators={false}
+                    showThumbs={false}>
                 {!!stats && stats.slice(0).reverse().map((season, i) => {
                     return (
                         <div key={i}>
@@ -68,20 +73,20 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick }) 
                                 <tbody>
                                     {player.pos !== 'G' ?
                                             <tr>
-                                                <th>{season.stat.games}</th>
-                                                <th>{season.stat.goals}</th>
-                                                <th>{season.stat.assists}</th>
-                                                <th>{season.stat.points}</th>
-                                                <th>{season.stat.plusMinus}</th>
+                                                <td>{!season.stat.games ?  '-' : season.stat.games}</td>
+                                                <td>{!season.stat.goals ?  '-' : season.stat.goals}</td>
+                                                <td>{!season.stat.assists ?  '-' : season.stat.assists}</td>
+                                                <td>{!season.stat.points ?  '-' : season.stat.points}</td>
+                                                <td>{!season.stat.plusMinus ?  '-' : season.stat.plusMinus}</td>
                                             </tr>
                                         :
 
                                         <tr>
-                                            <th>{season.stat.games}</th>
-                                            <th>{season.stat.wins + '-' + season.stat.losses + '-' + season.stat.ot}</th>
-                                            <th>{season.stat.savePercentage}</th>
-                                            <th>{season.stat.goalAgainstAverage}</th>
-                                            <th>{season.stat.shutouts}</th>
+                                            <td>{!season.stat.games ?  '-' : season.stat.games}</td>
+                                            <td>{!season.stat.wins ?  '-' : season.stat.wins + '-' + season.stat.losses + '-' + season.stat.ot}</td>
+                                            <td>{!season.stat.savePercentage ?  '-' : season.stat.savePercentage}</td>
+                                            <td>{!season.stat.goalAgainstAverage ?  '-' : season.stat.goalAgainstAverage}</td>
+                                            <td>{!season.stat.shutouts ?  '-' : season.stat.shutouts}</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -110,7 +115,8 @@ Card.propTypes = {
     removePlayer: PropTypes.func,
     onImgLoad: PropTypes.func,
     isImgLoaded: PropTypes.bool,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    isFullscreenMode: PropTypes.bool
 }
 
 export default Card

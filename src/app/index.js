@@ -7,7 +7,7 @@ import App from './containers/app/container'
 
 import reducers from './containers/reducers'
 import { routerForBrowser, initializeCurrentLocation } from 'redux-little-router'
-import { onInitialLoad, setFullscreenMode } from './containers/app/actions'
+import { onInitialLoad, setFullscreenMode, setEnterSearchMode } from './containers/app/actions'
 
 import { push } from 'redux-little-router'
 
@@ -89,6 +89,10 @@ if (initialLocation) {
                 players: parseArrayToQuery(unique)
             }
         }))
+    }
+    else {
+        store.dispatch(setFullscreenMode(false))
+        store.dispatch(setEnterSearchMode())
     }
 }
 const cookieFullscreen = cookies.get('fullscreen')

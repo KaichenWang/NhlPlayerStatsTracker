@@ -11,6 +11,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 class App extends React.Component {
     render() {
         const {
+            players,
             isSearchMode,
             isCommentMode,
             isModalOpen,
@@ -48,10 +49,12 @@ class App extends React.Component {
                                 leaveCommentMode()
                             }
                         }}>
-                            {!isFullscreenMode ?
-                                <i className="ti-arrows-corner" title="Enter fullscreen"></i>
+                            {Object.keys(players).length > 0 &&
+                                (!isFullscreenMode ?
+                                    <i className="ti-arrows-corner app_icon-fullscreen" title="Enter fullscreen"></i>
                                 :
-                                <i className="ti-layout-media-overlay-alt" title="Exit fullscreen"></i>
+                                    <i className="ti-layout-media-overlay-alt app_icon-fullscreen" title="Exit fullscreen"></i>
+                                )
                             }
                         </div>
                         <PlayerCards/>
@@ -73,7 +76,7 @@ class App extends React.Component {
                     transitionLeaveTimeout={200}
                     className="app__bottom"
                 >
-                    {!isFullscreenMode&&
+                    {!isFullscreenMode &&
                         <MenuBar/>
                     }
                 </ReactCSSTransitionGroup>

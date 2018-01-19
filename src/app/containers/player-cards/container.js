@@ -8,6 +8,8 @@ import { parseQueryToArray } from '../../utils'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+import classNames from 'classnames'
+
 import { MAX_PLAYERS } from '../../constants'
 
 class PlayerCards extends React.Component {
@@ -44,7 +46,9 @@ class PlayerCards extends React.Component {
         }
 
         return (
-            <div className="player-cards" onClick={onClickBg}>
+            <div className={'player-cards ' + classNames(
+                    {'player-cards__active': Object.keys(players).length > 0}
+                )} onClick={onClickBg}>
                 {/*{Object.keys(players).length > 0 &&*/}
                     {/*<div className={'player-cards__action'}>*/}
                         {/*<button className={'btn btn-primary btn-sm'} onClick={() => removeAllPlayers()}>Remove all</button>*/}
@@ -67,7 +71,7 @@ class PlayerCards extends React.Component {
                             if (count % 3 === 0 || count % 2 !== 0 && count > 3) {
                                 return (
                                     player &&
-                                    <div className="col-sm-12 col-md-6 col-lg-4 player-cards__box">
+                                    <div className="col-sm-12 col-md-6 col-lg-4 player-cards__box animated">
                                         <Card
                                             key={player.id}
                                             player={player}
@@ -75,6 +79,7 @@ class PlayerCards extends React.Component {
                                             removePlayer={removePlayer}
                                             onImgLoad={onImgLoad}
                                             isImgLoaded={playerImages.indexOf(player.id) !== -1}
+                                            isFullscreenMode={isFullscreenMode}
                                             onClick={(e) => {
                                                 e.stopPropagation()
                                             }}
@@ -86,7 +91,7 @@ class PlayerCards extends React.Component {
                             else if (count % 2 === 0) {
                                 return (
                                     player &&
-                                    <div className="col-sm-12 col-md-6 player-cards__box">
+                                    <div className="col-sm-12 col-md-6 player-cards__box animated">
                                         <Card
                                             key={player.id}
                                             player={player}
@@ -94,6 +99,7 @@ class PlayerCards extends React.Component {
                                             removePlayer={removePlayer}
                                             onImgLoad={onImgLoad}
                                             isImgLoaded={playerImages.indexOf(player.id) !== -1}
+                                            isFullscreenMode={isFullscreenMode}
                                             onClick={(e) => {
                                                 e.stopPropagation()
                                             }}
@@ -104,7 +110,7 @@ class PlayerCards extends React.Component {
                             else if (count === 1) {
                                 return (
                                     player &&
-                                    <div className="col-sm-12 player-cards__box">
+                                    <div className="col-sm-12 player-cards__box animated">
                                         <Card
                                             key={player.id}
                                             player={player}
@@ -112,6 +118,7 @@ class PlayerCards extends React.Component {
                                             removePlayer={removePlayer}
                                             onImgLoad={onImgLoad}
                                             isImgLoaded={playerImages.indexOf(player.id) !== -1}
+                                            isFullscreenMode={isFullscreenMode}
                                             onClick={(e) => {
                                                 e.stopPropagation()
                                             }}

@@ -89,6 +89,7 @@
     box-shadow: 0px 1px 0px 1px rgba(0,0,0,0,5);
     background: @gradient-default;
     overflow: hidden;
+    position: relative;
 }
 
 .c-card__image {
@@ -103,7 +104,7 @@
     text-align: center;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 32px;
+    font-size: 26px;
     color: @white-faded;
 }
 
@@ -122,7 +123,14 @@
     right: 0px;
     top: 0px;
     padding: 10px;
-    color: @gray-light;
+    color: @brand-white;
+
+    &:hover {
+        color: @brand-blue;
+    }
+}
+.c-card__remove.c-card__remove-faded {
+    color: @white-faded;
 
     &:hover {
         color: @brand-blue;
@@ -133,5 +141,7 @@
     th,
     td {
         white-space: nowrap;
+        padding-left: 0.1rem;
+        padding-right: 0.1rem;
     }
 }

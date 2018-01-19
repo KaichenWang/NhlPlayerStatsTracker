@@ -65,6 +65,9 @@ export function removePlayer(playerId) {
         }
         else {
             cookies.remove('path')
+            dispatch(setFullscreenMode(false))
+            dispatch(setEnterSearchMode())
+            dispatch(leaveCommentMode())
         }
     }
 }
@@ -78,6 +81,9 @@ export function removeAllPlayers() {
             }
         }))
         cookies.remove('path')
+        dispatch(setFullscreenMode(false))
+        dispatch(setEnterSearchMode())
+        dispatch(leaveCommentMode())
     }
 }
 

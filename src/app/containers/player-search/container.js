@@ -97,7 +97,7 @@ class PlayerSearch extends React.Component {
                                 </span>
                                 {
                                     players[result.id] ?
-                                        <i className={'search__check ti-minus'} title="Remove player"></i>
+                                        <i className={'search__check ti-check animated bounceIn'} title="Remove player"></i>
                                         :
                                         <i className={'search__plus ti-plus'} title="Add player"></i>
                                 }

@@ -21,19 +21,24 @@
 
 .app__fullscreen {
     position: absolute;
-    color: @gray-light;
+    color: @brand-white;
     font-size: x-large;
     cursor: pointer;
-    padding: 5px;
-    left:0;
-    top:0;
+    left: 15px;
+    top: 20px;
     z-index: 1;
+    display: inline-block;
 
     &:hover {
         color: @brand-blue;
     }
 }
 
+.app_icon-fullscreen {
+    border-radius: 100%;
+    background-color: @white-faded;
+    padding: 10px;
+}
 
 
 .app__sidebar {
@@ -83,7 +88,7 @@
     }
 
     .app__sidebar-inner,
-    .app__content-inner {
+    .player-cards {
         width: 100vw;
     }
 }
