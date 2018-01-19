@@ -73,20 +73,20 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, is
                                 <tbody>
                                     {player.pos !== 'G' ?
                                             <tr>
-                                                <td>{!season.stat.games ?  '-' : season.stat.games}</td>
-                                                <td>{!season.stat.goals ?  '-' : season.stat.goals}</td>
-                                                <td>{!season.stat.assists ?  '-' : season.stat.assists}</td>
-                                                <td>{!season.stat.points ?  '-' : season.stat.points}</td>
-                                                <td>{!season.stat.plusMinus ?  '-' : season.stat.plusMinus}</td>
+                                                <td>{typeof season.stat.games === 'undefined' ?  '-' : season.stat.games}</td>
+                                                <td>{typeof season.stat.goals === 'undefined' ?  '-' : season.stat.goals}</td>
+                                                <td>{typeof season.stat.assists === 'undefined' ?  '-' : season.stat.assists}</td>
+                                                <td>{typeof season.stat.points === 'undefined' ?  '-' : season.stat.points}</td>
+                                                <td>{typeof season.stat.plusMinus === 'undefined' ?  '-' : season.stat.plusMinus}</td>
                                             </tr>
                                         :
 
                                         <tr>
-                                            <td>{!season.stat.games ?  '-' : season.stat.games}</td>
-                                            <td>{!season.stat.wins ?  '-' : season.stat.wins + '-' + season.stat.losses + '-' + season.stat.ot}</td>
-                                            <td>{!season.stat.savePercentage ?  '-' : season.stat.savePercentage}</td>
-                                            <td>{!season.stat.goalAgainstAverage ?  '-' : season.stat.goalAgainstAverage}</td>
-                                            <td>{!season.stat.shutouts ?  '-' : season.stat.shutouts}</td>
+                                            <td>{typeof season.stat.games === 'undefined' ?  '-' : season.stat.games}</td>
+                                            <td>{typeof season.stat.wins === 'undefined' ?  '-' : season.stat.wins + '-' + season.stat.losses + '-' + season.stat.ot}</td>
+                                            <td>{typeof season.stat.savePercentage === 'undefined' ?  '-' : season.stat.savePercentage}</td>
+                                            <td>{typeof season.stat.goalAgainstAverage === 'undefined' ?  '-' : season.stat.goalAgainstAverage}</td>
+                                            <td>{typeof season.stat.shutouts === 'undefined' ?  '-' : season.stat.shutouts}</td>
                                         </tr>
                                     }
                                 </tbody>

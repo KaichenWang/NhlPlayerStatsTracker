@@ -1,4 +1,4 @@
-export const MAX_PLAYERS = 20
+export const MAX_PLAYERS = 6
 export const DURATION_ANIMATION = 300
 export const MESSAGE_MAX_PLAYER = 'Maximum ' + MAX_PLAYERS + ' players (during Beta)'
 
