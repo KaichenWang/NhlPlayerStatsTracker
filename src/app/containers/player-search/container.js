@@ -7,11 +7,13 @@ import { DebounceInput } from 'react-debounce-input'
 import { MAX_PLAYERS } from '../../constants'
 
 class PlayerSearch extends React.Component {
+    componentDidUpdate(prevProps) {
+        //debugger
+    }
     render() {
         const {
             players,
-            stats,
-            isSearchMode
+            stats
         } = this.props.app
 
         const {
@@ -49,25 +51,25 @@ class PlayerSearch extends React.Component {
 
         const onClear = () => {
             const input = this.input
-            input.value = ''
+            onSearchInputChange('')
+            setQuery('')
             input.focus()
         }
 
         return (
             <div className={'search'}>
                 <form onSubmit={e => { e.preventDefault(); }} autoComplete="off" className="search__form">
-                    {isSearchMode &&
-                        <DebounceInput
-                            type="text"
-                            debounceTimeout={500}
-                            placeholder="Search by player name"
-                            name="search"
-                            autoComplete="off"
-                            className={'search__input form-control'}
-                            onChange={onChange}
-                            autoFocus
-                            inputRef={(input) => this.input = input} />
-                    }
+                    <DebounceInput
+                        type="text"
+                        debounceTimeout={500}
+                        placeholder="Search by player name"
+                        name="search"
+                        value={query}
+                        autoComplete="off"
+                        className={'search__input form-control'}
+                        onChange={onChange}
+                        autoFocus
+                        inputRef={(input) => this.input = input} />
                     {query !== '' &&
                         <i className="ti-close search__clear" title="Clear search" onClick={onClear}></i>
                     }
