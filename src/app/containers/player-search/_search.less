@@ -3,7 +3,7 @@
 /*/
 
 .search {
-    background: @gradient-default;
+    background-color: @gray-darker;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -14,7 +14,7 @@
 }
 
 .search__result-item {
-    padding: 10px 0;
+    padding: 10px;
     border-bottom: 1px solid @white-faded;
     display: flex;
     flex-grow: 1;
@@ -24,8 +24,6 @@
     font-family: @font-primary;
     text-transform: uppercase;
     cursor: pointer;
-    padding-left: 10px;
-    padding-right: 10px;
 
     &:last-child {
         border-bottom: 1px solid transparent;

@@ -7,11 +7,16 @@ import { DebounceInput } from 'react-debounce-input'
 import { MAX_PLAYERS } from '../../constants'
 
 class PlayerSearch extends React.Component {
+    componentDidMount() {
+        this.input.focus()
+    }
+
     componentDidUpdate(prevProps) {
-        if (!prevProps.app.isSearchMode && this.props.app.isSearchMode || !prevProps.playerSearch.isSearchFocus && this.props.playerSearch.isSearchFocus) {
+        if (!prevProps.playerSearch.isSearchFocus && this.props.playerSearch.isSearchFocus) {
             this.input.focus()
         }
     }
+
     render() {
         const {
             players,

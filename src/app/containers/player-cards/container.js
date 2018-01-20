@@ -18,7 +18,8 @@ class PlayerCards extends React.Component {
             players,
             stats,
             playerImages,
-            isFullscreenMode
+            isFullscreenMode,
+            isSearchMode
         } = this.props.app
 
         const {
@@ -26,6 +27,7 @@ class PlayerCards extends React.Component {
         } = this.props.router
 
         const {
+            enterSearchMode,
             removePlayer,
             addPlayerImg
         } = this.props
@@ -114,6 +116,14 @@ class PlayerCards extends React.Component {
                         })
                     }
                 </ReactCSSTransitionGroup>
+                {!Object.keys(queryPlayers).length && !isSearchMode &&
+                    <div className="player-cards__add col-sm-12 pt-2 pb-2">
+                        <div className="player-cards__add-inner" onClick={enterSearchMode}>
+                            <i className="player-cards__add-icon ti-plus"></i>
+                            <h5 className="player-cards__add-label mt-3">Add Player</h5>
+                        </div>
+                    </div>
+                }
             </div>
         )
     }

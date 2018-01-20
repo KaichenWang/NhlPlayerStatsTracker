@@ -28,16 +28,28 @@ class App extends React.Component {
 
         const classNameSearch = isSearchMode ? 'sidebar--open' : 'sidebar--closed'
         const classNameComment = isCommentMode ? 'sidebar--open' : 'sidebar--closed'
-        const classNameContent = isCommentMode || isSearchMode ? 'sidebar--open' : 'sidebar--closed'
+        const classNameContent = isCommentMode || isSearchMode ?'sidebar--closed' : 'sidebar--open'
 
         return (
             <div className={'app'}>
                 <div className="app__main">
-                    <div className={'app__sidebar ' + classNameSearch}>
-                        <div className="app__sidebar-inner">
-                            <PlayerSearch/>
-                        </div>
-                    </div>
+
+                    <ReactCSSTransitionGroup
+                        transitionName={{
+                            enter: 'app__sidebar-inner--open',
+                            leave: 'app__sidebar-inner--closed'
+                        }}
+                        transitionEnterTimeout={200}
+                        transitionLeaveTimeout={200}
+                        className={'app__sidebar ' + classNameSearch}
+                    >
+                        {isSearchMode &&
+                            <div className="app__sidebar-inner">
+                                <PlayerSearch/>
+                            </div>
+                        }
+                    </ReactCSSTransitionGroup>
+
                     <div className={'app__content ' + classNameContent}>
                         <div className="app__fullscreen" onClick={() => {
                             if(isFullscreenMode) {
@@ -62,7 +74,7 @@ class App extends React.Component {
                     <div className={'app__sidebar ' + classNameComment}>
                         <div className="app__sidebar-inner">
                             <div className="comments">
-                                <div className="fb-comments" data-href="http://www.pksubbantracker.com/" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>
+                                <div className="fb-comments" data-href="http://www.pksubbantracker.com/" colorscheme="dark" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>
                             </div>
                         </div>
                     </div>
