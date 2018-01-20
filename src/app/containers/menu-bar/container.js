@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import * as appActions from '../app/actions'
+import * as searchActions from '../player-search/actions'
 
 class MenuBar extends React.Component {
     render() {
@@ -14,7 +15,10 @@ class MenuBar extends React.Component {
             enterSearchMode,
             enterCommentMode,
             enterPlayerMode,
-            clearNewPlayers
+            clearNewPlayers,
+            onSearchInputChange,
+            setQuery,
+            setSearchFocus
         } = this.props
 
         const classNameSearch = isSearchMode ? 'menu-bar__item--active' : ''
@@ -23,7 +27,12 @@ class MenuBar extends React.Component {
 
         return (
             <div className="menu-bar animated">
-                <div className={'menu-bar__item ' + classNameSearch} onClick={enterSearchMode}>
+                <div className={'menu-bar__item ' + classNameSearch} onClick={() => {
+                    enterSearchMode()
+                    onSearchInputChange('')
+                    setQuery('')
+                    setSearchFocus(true)
+                }}>
                     <i className="ti-plus menu-bar__icon"></i>
                     <span className="menu-bar__label">Add Player</span>
                 </div>
@@ -58,7 +67,10 @@ const mapDispatchToProps = {
     enterSearchMode: appActions.enterSearchMode,
     enterCommentMode: appActions.enterCommentMode,
     enterPlayerMode: appActions.enterPlayerMode,
-    clearNewPlayers: appActions.clearNewPlayers
+    clearNewPlayers: appActions.clearNewPlayers,
+    onSearchInputChange: searchActions.onSearchInputChange,
+    setQuery: searchActions.setQuery,
+    setSearchFocus: searchActions.setFocus
 }
 
 export default connect(

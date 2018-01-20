@@ -4,7 +4,8 @@ import * as actions from './actions'
 const initialState = {
     query: '',
     results: {},
-    isResultsLoading: false
+    isResultsLoading: false,
+    isSearchFocus: false
 }
 
 export default createReducer({
@@ -35,6 +36,11 @@ export default createReducer({
     [actions.setLoading]: (state, isResultsLoading) => {
         return Object.assign({}, state, {
             isResultsLoading
+        })
+    },
+    [actions.setFocus]: (state, isSearchFocus) => {
+        return Object.assign({}, state, {
+            isSearchFocus
         })
     }
 }, initialState)

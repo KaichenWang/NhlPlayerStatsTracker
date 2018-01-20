@@ -26,7 +26,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: auto 100%;
-    opacity: 0.8;
     transition: opacity 0.2s ease-in-out;
 }
 
@@ -143,5 +142,32 @@
         white-space: nowrap;
         padding-left: 0.1rem;
         padding-right: 0.1rem;
+    }
+}
+
+.carousel .control-arrow {
+    font-family: 'themify';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &.control-prev {
+        &::before {
+            content: "\e64a" !important;
+            border: 0 !important;
+        }
+    }
+
+    &.control-next {
+        &::before {
+            content: "\e649" !important;
+            border: 0 !important;
+        }
     }
 }

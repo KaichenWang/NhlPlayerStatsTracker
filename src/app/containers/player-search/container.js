@@ -8,7 +8,9 @@ import { MAX_PLAYERS } from '../../constants'
 
 class PlayerSearch extends React.Component {
     componentDidUpdate(prevProps) {
-        //debugger
+        if (!prevProps.app.isSearchMode && this.props.app.isSearchMode || !prevProps.playerSearch.isSearchFocus && this.props.playerSearch.isSearchFocus) {
+            this.input.focus()
+        }
     }
     render() {
         const {
@@ -25,6 +27,7 @@ class PlayerSearch extends React.Component {
         const {
             onSearchInputChange,
             setQuery,
+            setFocus,
             addPlayer,
             addStats,
             removePlayer,
@@ -68,12 +71,11 @@ class PlayerSearch extends React.Component {
                         autoComplete="off"
                         className={'search__input form-control'}
                         onChange={onChange}
-                        autoFocus
-                        inputRef={(input) => this.input = input} />
+                        inputRef={(input) => this.input = input}
+                        onBlur={() => setFocus(false)}/>
                     {query !== '' &&
                         <i className="ti-close search__clear" title="Clear search" onClick={onClear}></i>
                     }
-
                 </form>
                 <ul className={'search__result-group list-group'}>
                     {!isResultsLoading && Object.keys(results).map(function (key) {
@@ -132,6 +134,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     onSearchInputChange: actions.onSearchInputChange,
     setQuery: actions.setQuery,
+    setFocus: actions.setFocus,
     addPlayer: appActions.addPlayer,
     addStats: appActions.addStats,
     removePlayer: appActions.removePlayer,

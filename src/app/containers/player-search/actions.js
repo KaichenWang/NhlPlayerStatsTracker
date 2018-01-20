@@ -4,6 +4,7 @@ import fetch from 'cross-fetch'
 export const setQuery = createAction('Set search query')
 export const setResults = createAction('Set search results')
 export const setLoading = createAction('Set search results loading')
+export const setFocus = createAction('Set search results input focus')
 
 export function onSearchInputChange(value) {
     return (dispatch) => {

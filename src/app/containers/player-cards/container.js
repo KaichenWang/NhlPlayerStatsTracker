@@ -17,7 +17,6 @@ class PlayerCards extends React.Component {
         const {
             players,
             stats,
-            isSearchMode,
             playerImages,
             isFullscreenMode
         } = this.props.app
@@ -28,18 +27,10 @@ class PlayerCards extends React.Component {
 
         const {
             removePlayer,
-            enterSearchMode,
-            leaveSearchMode,
-            leaveCommentMode,
             addPlayerImg
         } = this.props
 
         const queryPlayers = !!query.players && query.players.length > 0 ? parseQueryToArray(query.players) : []
-
-        const onClickBg = () => {
-            leaveSearchMode()
-            leaveCommentMode()
-        }
 
         const onImgLoad = (playerId) => {
             addPlayerImg(playerId)
@@ -47,13 +38,7 @@ class PlayerCards extends React.Component {
 
         return (
             <div className={'player-cards ' + classNames(
-                    {'player-cards__active': Object.keys(players).length > 0}
-                )} onClick={onClickBg}>
-                {/*{Object.keys(players).length > 0 &&*/}
-                    {/*<div className={'player-cards__action'}>*/}
-                        {/*<button className={'btn btn-primary btn-sm'} onClick={() => removeAllPlayers()}>Remove all</button>*/}
-                    {/*</div>*/}
-                {/*}*/}
+                    {'player-cards__active': Object.keys(players).length > 0})}>
 
                 <ReactCSSTransitionGroup
                     transitionName={{
@@ -128,26 +113,7 @@ class PlayerCards extends React.Component {
                             }
                         })
                     }
-
-
-                    {/*{Object.keys(queryPlayers).length < MAX_PLAYERS && !isSearchMode && !isFullscreenMode &&*/}
-                        {/*<div className="player-cards__add col-sm-12 pt-2 pb-2">*/}
-                            {/*<div className="player-cards__add-inner" onClick={(e) => {*/}
-                                {/*e.stopPropagation()*/}
-                                {/*enterSearchMode()*/}
-                            {/*}}>*/}
-                                {/*<i className="player-cards__add-icon ti-plus"></i>*/}
-                                {/*<h5 className="player-cards__add-label mt-3">Add Player</h5>*/}
-                            {/*</div>*/}
-                        {/*</div>*/}
-                    {/*}*/}
                 </ReactCSSTransitionGroup>
-
-                {/*{Object.keys(players).length > 0 &&*/}
-                    {/*<div className={'player-cards__action'}>*/}
-                        {/*<button className={'btn btn-primary btn-sm'} onClick={() => removeAllPlayers()}>Remove all</button>*/}
-                    {/*</div>*/}
-                {/*}*/}
             </div>
         )
     }
