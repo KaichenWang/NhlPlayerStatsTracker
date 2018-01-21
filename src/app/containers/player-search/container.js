@@ -77,7 +77,8 @@ class PlayerSearch extends React.Component {
                         className={'search__input form-control'}
                         onChange={onChange}
                         inputRef={(input) => this.input = input}
-                        onBlur={() => setFocus(false)}/>
+                        onBlur={() => setFocus(false)}
+                        aria-label="Search by player name"/>
                     {query !== '' &&
                         <i className="ti-close search__clear" title="Clear search" onClick={onClear}></i>
                     }

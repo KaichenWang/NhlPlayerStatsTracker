@@ -1,5 +1,6 @@
 {
-    "name": "NHLTracker",
+    "name": "NHL Tracker",
+    "short_name": "NHL Tracker",
     "icons": [
         {
             "src": "/img/android-chrome-192x192.png",
