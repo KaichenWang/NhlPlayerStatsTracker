@@ -1,7 +1,7 @@
 import {createAction} from 'redux-act'
 import fetch from 'cross-fetch'
 import { push } from 'redux-little-router';
-import { MAX_PLAYERS, MESSAGE_MAX_PLAYER } from '../../constants'
+import { MAX_PLAYERS, MESSAGE_MAX_PLAYER, COOKIE_OPTIONS } from '../../constants'
 
 import { parseArrayToQuery } from '../../utils'
 
@@ -36,7 +36,7 @@ export function addPlayer(playerId) {
                     players: queryPlayers
                 }
             }))
-            cookies.set('path', queryPlayers)
+            cookies.set('path', queryPlayers, COOKIE_OPTIONS)
         }
         else {
             dispatch(setModalContent({
@@ -61,7 +61,7 @@ export function removePlayer(playerId) {
             }
         }))
         if (hasPlayers) {
-            cookies.set('path', queryPlayers)
+            cookies.set('path', queryPlayers, COOKIE_OPTIONS)
         }
         else {
             cookies.remove('path')

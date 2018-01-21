@@ -1,7 +1,7 @@
 import {createReducer} from 'redux-act'
 import * as actions from './actions'
 import {  } from 'redux-little-router';
-import { TEAMS } from '../../constants';
+import { TEAMS, COOKIE_OPTIONS } from '../../constants';
 
 import Cookies from 'universal-cookie'
 const cookies = new Cookies();
@@ -123,7 +123,7 @@ export default createReducer({
         })
     },
     [actions.setFullscreenMode]: (state, isFullscreenMode) => {
-        cookies.set('fullscreen', isFullscreenMode)
+        cookies.set('fullscreen', isFullscreenMode, COOKIE_OPTIONS)
         return Object.assign({}, state, {
             isFullscreenMode
         })

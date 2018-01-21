@@ -1,6 +1,10 @@
 export const MAX_PLAYERS = 6
 export const DURATION_ANIMATION = 300
 export const MESSAGE_MAX_PLAYER = 'Maximum ' + MAX_PLAYERS + ' players (during Beta)'
+export const COOKIE_OPTIONS = {
+    // 2 years
+    maxAge: 2*31557600
+}
 
 export const TEAMS = [ {
     "id" : 1,

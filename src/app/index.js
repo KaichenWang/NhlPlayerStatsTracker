@@ -11,7 +11,7 @@ import { onInitialLoad, setFullscreenMode, setEnterSearchMode } from './containe
 
 import { push } from 'redux-little-router'
 
-import { MAX_PLAYERS } from './constants'
+import { MAX_PLAYERS, COOKIE_OPTIONS } from './constants'
 
 import Cookies from 'universal-cookie'
 
@@ -68,7 +68,7 @@ const initialLocation = store.getState().router
 const cookies = new Cookies();
 let cookiePlayers
 if (!!initialLocation.query.players) {
-    cookies.set('path',initialLocation.query.players)
+    cookies.set('path',initialLocation.query.players, COOKIE_OPTIONS)
 }
 else {
     cookiePlayers = cookies.get('path')
