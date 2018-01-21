@@ -34,9 +34,6 @@
     color: @white-faded;
 }
 
-.c-card__data-container {
-}
-
 .c-card__inner {
     color: white;
     background-image: @gradient-black;
@@ -150,6 +147,22 @@
         white-space: nowrap;
         padding-left: 0.1rem;
         padding-right: 0.1rem;
+    }
+}
+
+.c-card__data {
+    th,
+    td {
+        border-top: 0 !important;
+        border-bottom: 0 !important;
+        width: 20%;
+        display: inline-block;
+    }
+
+    thead th {
+        border-bottom: @border-default !important;
+        font-size: small;
+        color: @white-faded;
     }
 }
 

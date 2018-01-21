@@ -64,9 +64,9 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, is
                                                 :
                                                 <tr>
                                                     <th>GP</th>
-                                                    <th>Record</th>
                                                     <th>Sv%</th>
                                                     <th>GAA</th>
+                                                    <th>Record</th>
                                                     <th>SO</th>
                                                 </tr>
                                             }
@@ -83,9 +83,9 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, is
                                                 :
                                                 <tr>
                                                     <td>{typeof season.stat.games === 'undefined' ? '-' : season.stat.games}</td>
-                                                    <td>{typeof season.stat.wins === 'undefined' ? '-' : season.stat.wins + '-' + season.stat.losses + '-' + season.stat.ot}</td>
                                                     <td>{typeof season.stat.savePercentage === 'undefined' ? '-' : season.stat.savePercentage}</td>
                                                     <td>{typeof season.stat.goalAgainstAverage === 'undefined' ? '-' : season.stat.goalAgainstAverage}</td>
+                                                    <td>{typeof season.stat.wins === 'undefined' ? '-' : season.stat.wins + '-' + season.stat.losses + '-' + season.stat.ot}</td>
                                                     <td>{typeof season.stat.shutouts === 'undefined' ? '-' : season.stat.shutouts}</td>
                                                 </tr>
                                             }
@@ -116,9 +116,9 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, is
                                     :
                                     <tr>
                                         <th>GP</th>
-                                        <th>Record</th>
                                         <th>Sv%</th>
                                         <th>GAA</th>
+                                        <th>Record</th>
                                         <th>SO</th>
                                     </tr>
                                 }
@@ -135,9 +135,9 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, is
                                     :
                                     <tr>
                                         <td>{typeof stats[0].stat.games === 'undefined' ? '-' : stats[0].stat.games}</td>
-                                        <td>{typeof stats[0].stat.wins === 'undefined' ? '-' : stats[0].stat.wins + '-' + stats[0].stat.losses + '-' + stats[0].stat.ot}</td>
                                         <td>{typeof stats[0].stat.savePercentage === 'undefined' ? '-' : stats[0].stat.savePercentage}</td>
                                         <td>{typeof stats[0].stat.goalAgainstAverage === 'undefined' ? '-' : stats[0].stat.goalAgainstAverage}</td>
+                                        <td>{typeof stats[0].stat.wins === 'undefined' ? '-' : stats[0].stat.wins + '-' + stats[0].stat.losses + '-' + stats[0].stat.ot}</td>
                                         <td>{typeof stats[0].stat.shutouts === 'undefined' ? '-' : stats[0].stat.shutouts}</td>
                                     </tr>
                                 }
@@ -165,9 +165,9 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, is
                                     :
                                     <tr>
                                         <th>GP</th>
-                                        <th>Record</th>
                                         <th>Sv%</th>
                                         <th>GAA</th>
+                                        <th>Record</th>
                                         <th>SO</th>
                                     </tr>
                                 }
