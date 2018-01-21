@@ -74,7 +74,7 @@ class App extends React.Component {
                     <div className={'app__sidebar ' + classNameComment}>
                         <div className="app__sidebar-inner">
                             <div className="comments">
-                                <div className="fb-comments" data-href="http://www.pksubbantracker.com/" colorscheme="dark" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>
+                                <div className="fb-comments" data-href="https://www.nhltracker.com/" colorscheme="dark" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>
                             </div>
                         </div>
                     </div>
