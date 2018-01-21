@@ -8,7 +8,7 @@
     top: 0;
     bottom: 0;
     right: 0;
-    background: @brand-black;
+    background: @gray-dark;
 
     &:hover {
         .c-card__background {
@@ -114,6 +114,7 @@
 .c-card__stats {
     width: 100%;
     border-radius: 0 0 9px 9px;
+    text-align: center;
 }
 
 .c-card__remove {
@@ -136,7 +137,14 @@
     }
 }
 
+.c-card__data-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .c-card__data {
+    margin-bottom: 0;
+
     th,
     td {
         white-space: nowrap;
@@ -156,6 +164,11 @@
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 20px !important;
+
+    &::before {
+        padding-top: 10px;
+    }
 
     &.control-prev {
         &::before {

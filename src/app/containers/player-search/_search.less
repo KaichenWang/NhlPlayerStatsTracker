@@ -88,10 +88,14 @@
 
 .search__check,
 .search__plus {
-    padding: 5px;
+    &::before {
+        padding: 5px;
+    }
 }
 
 .search__check {
-    background-color: @brand-blue;
-    border-radius: 100%
+    &::before {
+        background-color: @brand-blue;
+        border-radius: 100%
+    }
 }
