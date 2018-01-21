@@ -13,6 +13,7 @@
     "url": "https://github.com/KaichenWang/PKSubbanTracker"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "cheerio": "latest",
     "compression": "^1.7.1",
     "express": "latest",

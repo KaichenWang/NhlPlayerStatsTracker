@@ -1,12 +1,13 @@
 var webpack = require('webpack');
 var path = require('path');
+require("babel-polyfill");
 
 var BUILD_DIR = path.resolve(__dirname, 'src/public');
 var APP_DIR = path.resolve(__dirname, 'src/app');
 var CompressionPlugin = require('compression-webpack-plugin');
 
 var config = {
-    entry: APP_DIR + '/index.js',
+    entry: ["babel-polyfill", APP_DIR + '/index.js'],
     output: {
         path: BUILD_DIR,
         filename: 'bundle.js'
