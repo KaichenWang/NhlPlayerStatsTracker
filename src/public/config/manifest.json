@@ -3,7 +3,7 @@
     "short_name": "NHL Tracker",
     "icons": [
         {
-            "src": "src/public/img/android-chrome-192x192.png",
+            "src": "../img/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
