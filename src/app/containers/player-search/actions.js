@@ -11,7 +11,7 @@ export function onSearchInputChange(value) {
         dispatch(setLoading(true))
         const val = value.trim()
         if (val !== '') {
-            return fetch('/search?value=' + val)
+            return fetch('https://api.nhltracker.com/search?value=' + val)
                 .then(
                     response => response.json(),
                     // Do not use catch, because that will also catch
