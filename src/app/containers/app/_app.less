@@ -84,6 +84,25 @@
     background-color: @gray-darker;
 }
 
+.app__comments {
+    padding: 10px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-grow: 1;
+}
+
+.app__ad {
+    flex-shrink: 0;
+    box-shadow: @drop-shadow;
+    position: relative;
+    background: red;
+    border: 1px solid white;
+}
+
+.adsbygoogle {
+    width: 100%;
+}
+
 // mobile
 @media only screen and (max-width : (@screen-sm - 1)) {
     .sidebar--open {
@@ -95,6 +114,10 @@
     .app__sidebar-inner,
     .player-cards {
         width: 100vw;
+    }
+
+    .adsbygoogle {
+        height: 150px;
     }
 }
 
@@ -108,5 +131,19 @@
 
     .app__sidebar-inner {
         width: (1/3)*100vw
+    }
+}
+
+// tablet only
+@media only screen and (min-width : (@screen-sm)) and (max-width : (@screen-md - 1)) {
+    .adsbygoogle {
+        height: 200px;
+    }
+}
+
+// desktop only
+@media only screen and (min-width : (@screen-md)) {
+    .adsbygoogle {
+        height: 250px;
     }
 }

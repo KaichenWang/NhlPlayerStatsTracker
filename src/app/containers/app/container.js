@@ -83,8 +83,6 @@ class App extends React.Component {
                                                 layout="in-article"
                                                 style={{
                                                     display:'block',
-                                                    overflow:'hidden',
-                                                    'max-width': '100%',
                                                     'text-align': 'center'
                                                 }}
                                                 format="fluid" />
