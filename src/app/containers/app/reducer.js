@@ -16,7 +16,8 @@ const initialState = {
     teams: TEAMS,
     isModalOpen: false,
     modalContent: {},
-    isFullscreenMode: false
+    isFullscreenMode: false,
+    isAdOpen: true
 }
 
 export default createReducer({
@@ -126,6 +127,11 @@ export default createReducer({
         cookies.set('fullscreen', isFullscreenMode, COOKIE_OPTIONS)
         return Object.assign({}, state, {
             isFullscreenMode
+        })
+    },
+    [actions.setAd]: (state, isAdOpen) => {
+        return Object.assign({}, state, {
+            isAdOpen
         })
     },
 }, initialState)

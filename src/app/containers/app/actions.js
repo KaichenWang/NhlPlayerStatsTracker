@@ -24,6 +24,7 @@ export const addPlayerImg = createAction('Add player image')
 export const setModalOpen = createAction('Set modal open')
 export const setModalContent = createAction('Set modal content')
 export const setFullscreenMode = createAction('Set fullscreen mode')
+export const setAd = createAction('Set ad')
 
 
 export function addPlayer(playerId) {
