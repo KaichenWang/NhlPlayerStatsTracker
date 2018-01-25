@@ -84,7 +84,6 @@ class App extends React.Component {
                                                 style={{
                                                     display:'block',
                                                     overflow:'hidden',
-                                                    'max-height': '200px',
                                                     'max-width': '100%',
                                                     'text-align': 'center'
                                                 }}
