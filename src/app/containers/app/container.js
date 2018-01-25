@@ -5,6 +5,7 @@ import PlayerCards from '../player-cards/container'
 import MenuBar from '../menu-bar/container'
 import Modal from 'react-responsive-modal'
 import * as actions from './actions'
+import AdSense from 'react-adsense'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -72,10 +73,21 @@ class App extends React.Component {
                         <PlayerCards/>
                     </div>
                     <div className={'app__sidebar ' + classNameComment}>
-                        <div className="app__sidebar-inner">
+                        <div className="app__sidebar-inner app__right">
                             <div className="comments">
                                 <div className="fb-comments" data-href="https://www.nhltracker.com/" colorscheme="dark" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>
                             </div>
+                            <AdSense.Google client="ca-pub-9744931817553487"
+                                            slot="5318883280"
+                                            layout="in-article"
+                                            style={{
+                                                display:'block',
+                                                width: '100%',
+                                                overflow:'hidden',
+                                                'max-width': '100%',
+                                                'text-align': 'center'
+                                            }}
+                                            format="fluid" />
                         </div>
                     </div>
                 </div>
