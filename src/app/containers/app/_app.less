@@ -93,14 +93,12 @@
 
 .app__ad {
     flex-shrink: 0;
-    box-shadow: @drop-shadow;
-    position: relative;
-    background: red;
-    border: 1px solid white;
 }
 
 .adsbygoogle {
     width: 100%;
+    box-shadow: @drop-shadow;
+    position: relative;
 }
 
 // mobile
@@ -117,7 +115,7 @@
     }
 
     .adsbygoogle {
-        height: 150px;
+        height: 100px;
     }
 }
 
@@ -137,13 +135,13 @@
 // tablet only
 @media only screen and (min-width : (@screen-sm)) and (max-width : (@screen-md - 1)) {
     .adsbygoogle {
-        height: 200px;
+        height: 125px;
     }
 }
 
 // desktop only
 @media only screen and (min-width : (@screen-md)) {
     .adsbygoogle {
-        height: 250px;
+        height: 150px;
     }
 }
