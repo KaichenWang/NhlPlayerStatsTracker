@@ -93,12 +93,13 @@
 
 .app__ad {
     flex-shrink: 0;
+    padding: 5px;
+    box-shadow: @drop-shadow;
+    position: relative;
 }
 
 .adsbygoogle {
     width: 100%;
-    box-shadow: @drop-shadow;
-    position: relative;
 }
 
 // mobile
@@ -112,10 +113,6 @@
     .app__sidebar-inner,
     .player-cards {
         width: 100vw;
-    }
-
-    .adsbygoogle {
-        height: 100px;
     }
 }
 
@@ -132,16 +129,16 @@
     }
 }
 
-// tablet only
-@media only screen and (min-width : (@screen-sm)) and (max-width : (@screen-md - 1)) {
+// mobile
+@media only screen and (max-width : (@screen-md - 1)) {
     .adsbygoogle {
-        height: 125px;
+        height: 110px;
     }
 }
 
 // desktop only
 @media only screen and (min-width : (@screen-md)) {
     .adsbygoogle {
-        height: 150px;
+        height: 160px;
     }
 }
