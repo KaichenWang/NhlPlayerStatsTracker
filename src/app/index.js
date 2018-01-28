@@ -68,15 +68,13 @@ render(
 
 const initialLocation = store.getState().router
 const cookies = new Cookies();
-let cookiePlayers
-if (!!initialLocation.query.players) {
+let cookiePlayers = cookies.get('path')
+if (!!initialLocation.query.players && !cookiePlayers) {
     cookies.set('path',initialLocation.query.players, COOKIE_OPTIONS)
 }
-else {
-    cookiePlayers = cookies.get('path')
-}
 if (initialLocation) {
-    const queryPlayers = !!cookiePlayers ? cookiePlayers : initialLocation.query.players
+
+    const queryPlayers = !initialLocation.query.players ? cookiePlayers : initialLocation.query.players
     if(!!queryPlayers && queryPlayers.length > 0) {
         const playerIds = parseQueryToArray(queryPlayers)
         const limited =  playerIds.slice(0, MAX_PLAYERS)
