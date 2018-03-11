@@ -1,6 +1,8 @@
 import {createAction} from 'redux-act'
 import fetch from 'cross-fetch'
 
+import {SEARCH_API_URL} from '../../constants'
+
 export const setQuery = createAction('Set search query')
 export const setResults = createAction('Set search results')
 export const setLoading = createAction('Set search results loading')
@@ -11,7 +13,7 @@ export function onSearchInputChange(value) {
         dispatch(setLoading(true))
         const val = value.trim()
         if (val !== '') {
-            return fetch('https://api.nhltracker.com/search?value=' + val)
+            return fetch(SEARCH_API_URL + val)
                 .then(
                     response => response.json(),
                     // Do not use catch, because that will also catch
