@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>NHL Tracker</title>
+    <meta name="author" content="Kai">
+    <meta name="description" content="Track & compare every NHL player's stats">
+    <meta name="keywords" content="nhl,tracker,player,stats,goals,points,compare">
+    <link rel="apple-touch-icon" sizes="180x180" href="src/public/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="src/public/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="src/public/img/favicon-16x16.png">
+    <link rel="manifest" href="src/public/config/manifest.json">
+    <link rel="mask-icon" href="src/public/img/safari-pinned-tab.svg" color="#25bfdb">
+    <meta name="apple-mobile-web-app-title" content="NHL Tracker">
+    <meta name="application-name" content="NHL Tracker">
+    <link rel="shortcut icon" href="src/public/img/favicon.ico">
+    <meta name="msapplication-config" content="config/browserconfig.xml">
+    <meta name="theme-color" content="#232323">
+    <meta property="og:image" content="https://www.nhltracker.com/src/public/img/thumbnail.JPG"/>
+    <meta property="og:image:secure_url" content="https://www.nhltracker.com/src/public/img/thumbnail.JPG" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86116525-2"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-86116525-2');
+    </script>
+    
+    <style>
+        html,
+        body,
+        #app {
+            margin:0;
+            padding:0;
+            border:0;
+            outline:0;
+            font-size:100%;
+            display: block;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background: #232323;
+        }
+
+        .init-loader-container {
+            background-color: #232323;
+            height: 100%;
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+        .init-loader::before {
+            margin: auto;
+            content: '';
+            display: block;
+            border: 5px solid #f1f1f1;
+            /* Light grey */
+            border-top: 5px solid #25bfdb;
+            /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+        }
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=1825083474401640';
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="app">
+    <div class="init-loader-container">
+        <div class="init-loader"></div>
+    </div>
+</div>
+</body>
+</html>
