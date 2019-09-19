@@ -1,66 +1,30 @@
-// var webpack = require('webpack');
-// var path = require('path');
-// require("babel-polyfill");
-
-// var BUILD_DIR = path.resolve(__dirname, 'src/public');
-// var APP_DIR = path.resolve(__dirname, 'src/app');
-// var CompressionPlugin = require('compression-webpack-plugin');
-
-// var config = {
-//     entry: ["babel-polyfill", APP_DIR + '/index.js'],
-//     output: {
-//         path: BUILD_DIR,
-//         filename: 'bundle.js'
-//     },
-//     module : {
-//         loaders : [
-//             {
-//                 test : /\.js?/,
-//                 include : APP_DIR,
-//                 loader : 'babel-loader'
-//             }
-//         ]
-//     },
-//     plugins: [
-//         new webpack.DefinePlugin({ // <-- key to reducing React's size
-//             'process.env': {
-//                 'NODE_ENV': JSON.stringify('production')
-//             }
-//         }),
-//         new webpack.optimize.DedupePlugin(), //dedupe similar code
-//         new webpack.optimize.UglifyJsPlugin(), //minify everything
-//         new webpack.optimize.AggressiveMergingPlugin(),//Merge chunks
-//         new CompressionPlugin({   //<-- Add this
-//             asset: "[path].gz[query]",
-//             algorithm: "gzip",
-//             test: /\.js$|\.css$|\.html$/,
-//             threshold: 10240,
-//             minRatio: 0.8
-//         })
-//     ]
-// };
-
-// module.exports = config;
-
-
-
 const path = require('path');
-var APP_DIR = path.resolve(__dirname, 'src/app');
+const APP_DIR = path.resolve(__dirname, 'src/app');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
-module.exports = {
+let config = {
     entry: [
         './src/app/index.js',
-        './src/app/static/less/styles.less'
+        './src/app/global/less/styles.less'
     ],
-    devtool: 'inline-source-map',
     plugins: [
-        // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+        // Clean dist folder
         new CleanWebpackPlugin(),
+        // Generate dist/index.html
         new HtmlWebpackPlugin({
             template: 'src/index.html'
-        })
+        }), 
+        // Extract CSS into file
+        new MiniCssExtractPlugin(),
+        // Minify CSS
+        new OptimizeCSSAssetsPlugin(),
+        // Uglify
+        new UglifyJsPlugin()
     ],
     output: {
         filename: '[name].bundle.js',
@@ -77,34 +41,70 @@ module.exports = {
                 test: /\.less$/,
                 use: [
                     {
-                        loader: 'style-loader',
+                        loader: MiniCssExtractPlugin.loader
+                        
                     },
                     {
                         loader: 'css-loader',
                         options: {
-                        sourceMap: true,
+                            sourceMap: true,
                         },
                     },
                     {
                         loader: 'less-loader',
                         options: {
-                        sourceMap: true,
+                            sourceMap: true,
                         },
                     },
                 ],
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                include: [
+                    path.resolve(__dirname, 'src/assets/fonts/')
+                ],
                 use: [
-                  {
-                    loader: 'file-loader',
-                    options: {
-                      name: '[name].[ext]',
-                      outputPath: 'fonts/'
+                    {
+                        loader: 'file-loader',
+                        
                     }
-                  }
+                ]
+            },
+            {
+                test: /\.(png|svg|jpg|gif|ico)$/,
+                include: [
+                    path.resolve(__dirname, 'src/assets/images/')
+                ],
+                use: [
+                    {
+                        loader: 'file-loader',                        
+                    
+                    }
+                ]
+            },
+            {
+                test: /\.xml$/,
+                include: [
+                    path.resolve(__dirname, 'src/assets/config/')
+                ],
+                use: [
+                    {
+                        loader: 'file-loader',                        
+                       
+                    }
                 ]
             }
         ]
     }
+};
+
+module.exports = (env, argv) => {
+    if (argv.mode === 'development') {
+        config.devtool = 'source-map';
+        config.devServer=  {
+            contentBase: './dist'
+        }
+    }
+
+    return config;
 };

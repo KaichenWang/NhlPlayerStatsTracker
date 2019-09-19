@@ -1,10 +1,6 @@
 var express = require('express');
-// var fs = require('fs');
-// var request = require('request');
-// var compression = require('compression');
-var app = express();
 var path = require('path');
-
+var app = express();
 var PORT = process.env.PORT || 8080;
 
 app.get('/', function(req, res) {
