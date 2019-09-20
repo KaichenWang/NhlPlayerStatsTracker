@@ -5,26 +5,21 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+
 
 let config = {
     entry: [
         './src/app/index.js',
         './src/app/global/less/styles.less'
     ],
-    plugins: [
-        // Clean dist folder
-        new CleanWebpackPlugin(),
-        // Generate dist/index.html
+    plugins: [        
+        new CleanWebpackPlugin(), // Clean dist folder        
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
-        }), 
-        // Extract CSS into file
-        new MiniCssExtractPlugin(),
-        // Minify CSS
-        new OptimizeCSSAssetsPlugin(),
-        // Uglify
-        new UglifyJsPlugin()
+            template: 'src/index.html' // Generate dist/index.html
+        }),        
+        new MiniCssExtractPlugin(), // Extract CSS into file        
+        new OptimizeCSSAssetsPlugin(), // Minify CSS        
+        new UglifyJsPlugin() // Uglify JS
     ],
     output: {
         filename: '[name].bundle.js',
@@ -33,29 +28,17 @@ let config = {
     module : {
         rules : [
             {
-                test : /\.js?/,
-                include : APP_DIR,
-                loader : 'babel-loader'
+                test: /\.js?/,
+                include: APP_DIR,
+                use: 'babel-loader'
             },
             {
                 test: /\.less$/,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader
-                        
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                        },
-                    },
-                    {
-                        loader: 'less-loader',
-                        options: {
-                            sourceMap: true,
-                        },
-                    },
+                    'style-loader',
+                    MiniCssExtractPlugin.loader,              
+                    'css-loader?sourceMap',
+                    'less-loader?sourceMap'
                 ],
             },
             {
@@ -63,46 +46,34 @@ let config = {
                 include: [
                     path.resolve(__dirname, 'src/assets/fonts/')
                 ],
-                use: [
-                    {
-                        loader: 'file-loader',
-                        
-                    }
-                ]
+                use: ['file-loader']
             },
             {
                 test: /\.(png|svg|jpg|gif|ico)$/,
                 include: [
                     path.resolve(__dirname, 'src/assets/images/')
                 ],
-                use: [
-                    {
-                        loader: 'file-loader',                        
-                    
-                    }
-                ]
+                use: ['file-loader']
             },
             {
                 test: /\.xml$/,
-                include: [
-                    path.resolve(__dirname, 'src/assets/config/')
-                ],
-                use: [
-                    {
-                        loader: 'file-loader',                        
-                       
-                    }
-                ]
+                use: ['file-loader']
             }
         ]
     }
 };
 
 module.exports = (env, argv) => {
-    if (argv.mode === 'development') {
-        config.devtool = 'source-map';
-        config.devServer=  {
-            contentBase: './dist'
+    const isDev = argv.mode === 'development';
+
+    config.devtool = isDev ? '#eval-source-map' : 'source-map';
+
+    if (isDev) {        
+        config.devServer = {
+            stats: {
+                children: false, // Hide children information
+                maxModules: 0 // Set the maximum number of modules to be shown
+            }
         }
     }
 
