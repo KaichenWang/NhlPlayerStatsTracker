@@ -16,7 +16,8 @@ const initialState = {
     teams: TEAMS,
     isModalOpen: false,
     modalContent: {},
-    isFullscreenMode: false
+    isFullscreenMode: false,
+    isAdOpen: true
 }
 
 export default createReducer({
@@ -51,7 +52,7 @@ export default createReducer({
         let stats = {}
         const allStats = payload.data.people[0].stats[0].splits
         const currentSeason = allStats.filter((obj) => {
-            return obj.season === '20172018'
+            return obj.season === '20182019'
         });
         stats[payload.playerId] = currentSeason
 
@@ -126,6 +127,11 @@ export default createReducer({
         cookies.set('fullscreen', isFullscreenMode, COOKIE_OPTIONS)
         return Object.assign({}, state, {
             isFullscreenMode
+        })
+    },
+    [actions.setAd]: (state, isAdOpen) => {
+        return Object.assign({}, state, {
+            isAdOpen
         })
     },
 }, initialState)

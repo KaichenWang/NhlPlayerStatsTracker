@@ -5,6 +5,7 @@ import PlayerCards from '../player-cards/container'
 import MenuBar from '../menu-bar/container'
 import Modal from 'react-responsive-modal'
 import * as actions from './actions'
+import AdSense from 'react-adsense'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -16,14 +17,16 @@ class App extends React.Component {
             isCommentMode,
             isModalOpen,
             modalContent,
-            isFullscreenMode
+            isFullscreenMode,
+            isAdOpen
         } = this.props.app
 
         const {
             setModalOpen,
             setFullscreenMode,
             leaveSearchMode,
-            leaveCommentMode
+            leaveCommentMode,
+            setAd
         } = this.props
 
         const classNameSearch = isSearchMode ? 'sidebar--open' : 'sidebar--closed'
@@ -72,10 +75,23 @@ class App extends React.Component {
                         <PlayerCards/>
                     </div>
                     <div className={'app__sidebar ' + classNameComment}>
-                        <div className="app__sidebar-inner">
-                            <div className="comments">
+                        <div className="app__sidebar-inner app__right">
+                            <div className="app__comments">
                                 <div className="fb-comments" data-href="https://www.nhltracker.com/" colorscheme="dark" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>
                             </div>
+                            {isAdOpen &&
+                                <div className="app__ad">
+                                    <i className="app__ad-remove ti-close" onClick={() => setAd(false)}></i>
+                                    <AdSense.Google client="ca-pub-9744931817553487"
+                                                    slot="5318883280"
+                                                    layout="in-article"
+                                                    style={{
+                                                        display:'block',
+                                                        'text-align': 'center'
+                                                    }}
+                                                    format="fluid" />
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -111,7 +127,8 @@ const mapDispatchToProps = {
     setModalOpen: actions.setModalOpen,
     setFullscreenMode: actions.setFullscreenMode,
     leaveSearchMode: actions.leaveSearchMode,
-    leaveCommentMode: actions.leaveCommentMode
+    leaveCommentMode: actions.leaveCommentMode,
+    setAd: actions.setAd
 }
 
 export default connect(

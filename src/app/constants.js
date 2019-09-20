@@ -1,10 +1,11 @@
-export const MAX_PLAYERS = 6
+export const MAX_PLAYERS = 24
 export const DURATION_ANIMATION = 300
 export const MESSAGE_MAX_PLAYER = 'Maximum ' + MAX_PLAYERS + ' players (during Beta)'
 export const COOKIE_OPTIONS = {
     // 2 years
     maxAge: 2*31557600
 }
+export const SEARCH_API_URL = 'https://nhl-tracker-api.now.sh/search?value='
 
 export const TEAMS = [ {
     "id" : 1,

@@ -1,0 +1,98 @@
+/* Imports */
+@import '_variables.less';
+@import '_icons.less';
+@import '_carousel.less';
+
+/* Components */
+@import '../../components/card/_card.less';
+
+/* Containers */
+@import '../../containers/app/_app.less';
+@import '../../containers/menu-bar/_menu.less';
+@import '../../containers/player-cards/_cards.less';
+@import '../../containers/player-search/_search.less';
+
+
+html,
+body,
+#app {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: @font-primary;
+    text-transform: uppercase;
+    background: @gray-dark;
+}
+
+.page-title-container {
+    padding: 20px;
+    display: none;
+}
+
+.c-loader {
+    &::before {
+        margin: auto;
+        content:'';
+        display: block;
+        border: 3px solid @gray-lighter; /* Light grey */
+        border-top: 3px solid @brand-blue; /* Blue */
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media only screen and (max-width : (@screen-sm - 1)) {
+    .c-loader {
+        &::before {
+            border: 6px solid #f3f3f3; /* Light grey */
+            border-top: 6px solid #00b8ff; /* Blue */
+            width: 25px;
+            height: 25px;
+        }
+    }
+}
+
+.animated {
+    animation-duration: @animation-duration;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.btn--full-width {
+    width: 100%;
+}
+
+.btn-outline-primary {
+    color: @gray-dark;
+    border: 1px solid @gray-dark;
+
+    &:hover {
+        background-color: @white-faded;
+        color: @gray-dark;
+        border: 1px solid @gray-dark;
+    }
+}
+
+.carousel .slider {
+    margin: 0;
+    padding: 0;
+}
+
+.carousel .slide {
+    background-color: transparent;
+}
