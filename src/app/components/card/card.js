@@ -9,7 +9,7 @@ import { Carousel } from 'react-responsive-carousel';
 const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, isFullscreenMode}) => (
     <div className={ componentClass }>
         <div className={ componentClass + '__background'}
-             style={{'background-image': 'url("https://nhl.bamcontent.com/images/actionshots/' + player.id + '.jpg")'}}>
+             style={{'backgroundImage': 'url("https://nhl.bamcontent.com/images/actionshots/' + player.id + '.jpg")'}}>
         </div>
         <div className={ componentClass + '__inner'} onClick={onClick}>
             <i className={componentClass + '__remove ti-close ' +

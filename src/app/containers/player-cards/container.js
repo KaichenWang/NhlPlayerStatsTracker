@@ -58,7 +58,7 @@ class PlayerCards extends React.Component {
                             if (count % 3 === 0 || count % 2 !== 0 && count > 3) {
                                 return (
                                     player &&
-                                    <div className="col-sm-12 col-md-6 col-lg-4 player-cards__box animated">
+                                    <div key={player.id} className="col-sm-12 col-md-6 col-lg-4 player-cards__box animated">
                                         <Card
                                             key={player.id}
                                             player={player}
@@ -78,7 +78,7 @@ class PlayerCards extends React.Component {
                             else if (count % 2 === 0) {
                                 return (
                                     player &&
-                                    <div className="col-sm-12 col-md-6 player-cards__box animated">
+                                    <div key={player.id} className="col-sm-12 col-md-6 player-cards__box animated">
                                         <Card
                                             key={player.id}
                                             player={player}
@@ -97,7 +97,7 @@ class PlayerCards extends React.Component {
                             else if (count === 1) {
                                 return (
                                     player &&
-                                    <div className="col-sm-12 player-cards__box animated">
+                                    <div key={player.id} className="col-sm-12 player-cards__box animated">
                                         <Card
                                             key={player.id}
                                             player={player}
