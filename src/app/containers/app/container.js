@@ -79,19 +79,6 @@ class App extends React.Component {
                             <div className="app__comments">
                                 <div className="fb-comments" data-href="https://www.nhltracker.com/" colorscheme="dark" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>
                             </div>
-                            {isAdOpen &&
-                                <div className="app__ad">
-                                    <i className="app__ad-remove ti-close" onClick={() => setAd(false)}></i>
-                                    <AdSense.Google client="ca-pub-9744931817553487"
-                                                    slot="5318883280"
-                                                    layout="in-article"
-                                                    style={{
-                                                        display:'block',
-                                                        'text-align': 'center'
-                                                    }}
-                                                    format="fluid" />
-                                </div>
-                            }
                         </div>
                     </div>
                 </div>

@@ -52,7 +52,7 @@ export default createReducer({
         let stats = {}
         const allStats = payload.data.people[0].stats[0].splits
         const currentSeason = allStats.filter((obj) => {
-            return obj.season === '20182019'
+            return obj.season === '20192020'
         });
         stats[payload.playerId] = currentSeason
 
