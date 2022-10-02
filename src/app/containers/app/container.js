@@ -73,14 +73,7 @@ class App extends React.Component {
                             }
                         </div>
                         <PlayerCards/>
-                    </div>
-                    <div className={'app__sidebar ' + classNameComment}>
-                        <div className="app__sidebar-inner app__right">
-                            <div className="app__comments">
-                                <div className="fb-comments" data-href="https://www.nhltracker.com/" colorscheme="dark" data-width="100%" data-numposts="10" data-order-by="reverse_time"></div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>                   
                 </div>
                 <ReactCSSTransitionGroup
                     transitionName={{
