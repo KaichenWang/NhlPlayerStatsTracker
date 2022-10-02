@@ -9,7 +9,7 @@ import { Carousel } from 'react-responsive-carousel';
 const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, isFullscreenMode}) => (
     <div className={ componentClass }>
         <div className={ componentClass + '__background'}
-             style={{'backgroundImage': 'url("https://nhl.bamcontent.com/images/actionshots/' + player.id + '.jpg")'}}>
+             style={{'backgroundImage': `url("https://cms.nhl.bamgrid.com/images/actionshots/${player.id}.jpg")`}}>
         </div>
         <div className={ componentClass + '__inner'} onClick={onClick}>
             <i className={componentClass + '__remove ti-close ' +
@@ -26,8 +26,8 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, is
                                     {'image--loaded': isImgLoaded},
                                     {'image--error d-none': !isImgLoaded}
                                 )
-                            }
-                            src={'https://nhl.bamcontent.com/images/headshots/current/168x168/' + player.id + '.png'}/>
+                            }                          
+                            src={`https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${player.id}.jpg`}/>
                         {!isImgLoaded &&
                             <div className={componentClass + '__initials'}>{player.firstName.charAt(0)+player.lastName.charAt(0)}</div>
                         }
