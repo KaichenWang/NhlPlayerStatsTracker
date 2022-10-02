@@ -33,25 +33,21 @@ class MenuBar extends React.Component {
                     setQuery('')
                     setSearchFocus(true)
                 }}>
-                    <i className="ti-plus menu-bar__icon"></i>
-                    <span className="menu-bar__label">Add Player</span>
+                    <i className="ti-search menu-bar__icon"></i>
+                    <span className="menu-bar__label">Find Players</span>
                 </div>
                 <div className={'menu-bar__item ' + classNamePlayer} onClick={() => {
                     clearNewPlayers()
                     enterPlayerMode()
                 }}>
                     <div className={'menu-bar__icon-container'}>
-                        <i className="ti-user menu-bar__icon"></i>
+                        <i className="ti-heart menu-bar__icon"></i>
                         {newPlayers.length > 0 &&
                             <span className="menu-bar__notification animated bounceIn">{newPlayers.length}</span>
                         }
                     </div>
                     <span className="menu-bar__label">My Players</span>
-                </div>
-                <div className={'menu-bar__item ' + classNameComment} onClick={enterCommentMode}>
-                    <i className="ti-comment-alt menu-bar__icon"></i>
-                    <span className="menu-bar__label">Comments</span>
-                </div>
+                </div>               
             </div>
         )
     }
