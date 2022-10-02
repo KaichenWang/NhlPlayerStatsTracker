@@ -7,7 +7,7 @@ Web app for comparing stats of NHL players
 
 ### Production build
     npm run build
-Available under `dist/`
+Available under `docs/`
 
 ### Test production build on local server
     npm run build

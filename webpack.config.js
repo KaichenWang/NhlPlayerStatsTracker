@@ -13,9 +13,9 @@ let config = {
         './src/app/global/less/styles.less'
     ],
     plugins: [        
-        new CleanWebpackPlugin(), // Clean dist folder        
+        new CleanWebpackPlugin(), // Clean docs folder        
         new HtmlWebpackPlugin({
-            template: 'src/index.html' // Generate dist/index.html
+            template: 'src/index.html' // Generate docs/index.html
         }),        
         new MiniCssExtractPlugin(), // Extract CSS into file        
         new OptimizeCSSAssetsPlugin(), // Minify CSS        
@@ -23,7 +23,7 @@ let config = {
     ],
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'docs')
     },
     module : {
         rules : [
