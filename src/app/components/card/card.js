@@ -27,7 +27,7 @@ const Card = ({ player, stats, removePlayer, onImgLoad, isImgLoaded, onClick, is
                                     {'image--error d-none': !isImgLoaded}
                                 )
                             }                          
-                            src={`https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${player.id}.jpg`}/>
+                            src={`https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${player.id}.png`}/>
                         {!isImgLoaded &&
                             <div className={componentClass + '__initials'}>{player.firstName.charAt(0)+player.lastName.charAt(0)}</div>
                         }
